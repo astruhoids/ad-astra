@@ -8,9 +8,9 @@ class Landing extends React.Component {
       <Container id='landing-page'>
         <Row>
           <Col xs={4}>
-            <Image fluid src="/images/meteor-logo.png"/>
+            <Image style={{ width: "200px", height: "auto" }} fluid roundedCircle src="/images/meteor-logo.png"/>
           </Col>
-          <Col xs={8}>
+          <Col xs={8} className="text-center my-auto">
             <h1>Welcome to this template</h1>
             <p>Now get to work and modify this app!</p>
           </Col>

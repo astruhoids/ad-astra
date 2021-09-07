@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { withRouter, NavLink } from 'react-router-dom';
-import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown, Dropdown, NavItem } from 'react-bootstrap';
+import { FontAwesomeIcon  } from '@fortawesome/react-fontawesome';
+import { faUser, faUserMinus, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import { Roles } from 'meteor/alanning:roles';
 
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
@@ -16,14 +18,24 @@ class NavBar extends React.Component {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#link">Link</Nav.Link>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+            { this.props.currentUser ? (
+              [<Nav.Link as={NavLink} activeClassName="active" exact to="/add" key='add'>Add Stuff</Nav.Link>,
+              <Nav.Link as={NavLink} activeClassName="active" exact to="/list" key='list'>List Stuff</Nav.Link>]
+            ) : ''}
+            {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
+              <Nav.Link as={NavLink} activeClassName="active" exact to="/admin" key="admin">Admin</Nav.Link>
+            ) : ''}
+          </Nav>
+          <Nav className="float-right">
+            <NavDropdown title={this.props.currentUser === '' ? (<span>Login&nbsp;<FontAwesomeIcon icon={faUser}/></span>) : (<span>{this.props.currentUser}<FontAwesomeIcon icon="user"/></span>)} id="login-dropdown">
+                {this.props.currentUser === '' ? (
+                  <>
+                    <NavDropdown.Item as={NavLink} exact to="/login"><FontAwesomeIcon icon={faUser} className="mr-2"/>&nbsp;Sign In</NavDropdown.Item>
+                    <NavDropdown.Item as={NavLink} exact to="/signup"><FontAwesomeIcon icon={faUserPlus} className="mr-1"/>&nbsp;Sign Up</NavDropdown.Item>
+                  </>
+                ) : (
+                  <NavDropdown.Item as={NavLink} exact to="/signout"><FontAwesomeIcon icon={faUserMinus} className="mr-1"/>&nbsp;Sign Out</NavDropdown.Item>
+                )}
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
