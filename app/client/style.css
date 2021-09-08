@@ -1,0 +1,24 @@
+#landing-page {
+    background-color: whitesmoke !important;
+    border-radius: 15px;
+    max-width: fit-content;
+    min-height: auto;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+}
+
+#bg-image {
+    background: url('images/amongus-background.png');
+    min-height: 720px;
+    max-width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.landing-btns {
+    margin-top: 2rem;
+    width: 100%;
+}
