@@ -1,7 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { Button, Container, Row, Col } from 'react-bootstrap';
-// import Clearance from '../components/Clearance';
 
 /** A simple static component to render some text for the landing page. */
 class DailyCheckup extends React.Component {
@@ -11,22 +10,20 @@ class DailyCheckup extends React.Component {
   }
 
   submit(e) {
-    e = e == 'true' ? true : false;
-
-    this.setState({ choice: e, redirectToReferer: true });
+    const option = e === 'true';
+    this.setState({ choice: option, redirectToReferer: true });
   }
 
   render() {
-    // if correct authentication, redirect to page instead of login screen
+    // if user responds to daily checkin, redirect login screen
     if (this.state.redirectToReferer) {
       return <Redirect to={{ pathname: '/' }}/>;
     }
 
     return (
       <div>
-        {/* <Clearance /> */}
         <Container id="bg-image" className="d-flex" fluid>
-          <Container style={{ backgroundColor: 'whitesmoke', padding: '2.5rem', marginTop: '5rem', marginBottom: '5rem' }}>
+          <Container id="daily-check">
             <Row>
               <h1>Do any of the following apply to you?</h1>
             </Row>

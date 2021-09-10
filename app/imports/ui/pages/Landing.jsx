@@ -1,13 +1,11 @@
 import React from 'react';
 import { Container, Col, Row, Button, Image } from 'react-bootstrap';
-import Clearance from '../components/Clearance';
 
 /** A simple static component to render some text for the landing page. */
 class Landing extends React.Component {
   render() {
     return (
       <div>
-        <Clearance />
         <Container id="bg-image" className="d-flex" fluid>
           <Container id='landing-page' className="text-center justify-content-center align-self-center">
             <Row>
