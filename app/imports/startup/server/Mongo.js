@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Stuffs } from '../../api/stuff/Stuff.js';
+import { HealthStatus } from '../../api/healthstatus/HealthStatus.js'
 
 /* eslint-disable no-console */
 
@@ -7,6 +8,11 @@ import { Stuffs } from '../../api/stuff/Stuff.js';
 function addData(data) {
   console.log(`  Adding: ${data.name} (${data.owner})`);
   Stuffs.collection.insert(data);
+}
+
+function addCheckIn(data) {
+  console.log(`\tRecording health check-in at ${data.date} for ${data.user}`);
+  HealthStatus.collection.insert(data);
 }
 
 // Initialize the StuffsCollection if empty.
