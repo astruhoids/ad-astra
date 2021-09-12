@@ -9,6 +9,7 @@ import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import DailyCheckup from '../pages/DailyCheckup';
 import Clearance from '../components/Clearance';
+import History from  '../pages/History';
 // import ListStuff from '../pages/ListStuff';
 // import ListStuffAdmin from '../pages/ListStuffAdmin';
 // import AddStuff from '../pages/AddStuff';
@@ -32,6 +33,7 @@ class App extends React.Component {
             <Route exact path="/login" component={Signin}/>
             <Route path="/signup" component={Signup}/>
             <Route path="/signout" component={Signout}/>
+            <Route exact path="/history" component={History}/>
             {/* <Route path="/signin" component={Signin}/>
             <Route path="/signup" component={Signup}/>
             <Route path="/signout" component={Signout}/>

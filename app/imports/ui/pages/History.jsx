@@ -20,38 +20,40 @@ class History extends React.Component {
   // Render the page once subscriptions have been received.
   renderPage() {
     return (
-      <Container>
-        <Row xs={1} md={1} className="g-4">
-          <Col>
-            <Card>
-              <Card.Body>
-                <Card.Text>Sep 8, 2021 at 7:36 AM</Card.Text>
-                <Card.Title color='green'>
-                  <FontAwesomeIcon icon={faCheck} className="mr-2" color='green'/>
+      <Container id="bg-image">
+        <Container id="history">
+          <Row xs={1} md={1} className="g-4">
+            <Col>
+              <Card>
+                <Card.Body>
+                  <Card.Text>Sep 8, 2021 at 7:36 AM</Card.Text>
+                  <Card.Title color='green'>
+                    <FontAwesomeIcon icon={faCheck} className="mr-2" color='green'/>
                   You may report to campus / Anyone in Quarantine MUST continue to adhere to location restrictions
-                </Card.Title>
-                <hr />
-                <Card.Link href='/'>
-                  <small className="text-muted">View Details &gt;</small>
-                </Card.Link>
-              </Card.Body>
-            </Card>
-            <Card>
-              <Card.Body>
-                <Card.Text>Sep 7, 2021 at 7:00 AM</Card.Text>
-                <Card.Title>
-                  <FontAwesomeIcon icon={faTimes} className="mr-2" color='red'/>
+                  </Card.Title>
+                  <hr />
+                  <Card.Link href='/'>
+                    <small className="text-muted">View Details &gt;</small>
+                  </Card.Link>
+                </Card.Body>
+              </Card>
+              <Card>
+                <Card.Body>
+                  <Card.Text>Sep 7, 2021 at 7:00 AM</Card.Text>
+                  <Card.Title>
+                    <FontAwesomeIcon icon={faTimes} className="mr-2" color='red'/>
                   Stay home or in your campus residence. DO NOT report to campus. DO NOT attend UH in-person events or activities.
-                </Card.Title>
-                <hr />
-                <Card.Link href='/'>
-                  <small className="text-muted">View Details &gt;</small>
-                </Card.Link>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-        {/* {this.props.checkins.map((checkin, index) ==> <CheckInCards key=>{index} checkin={checkin}/)} */}
+                  </Card.Title>
+                  <hr />
+                  <Card.Link href='/'>
+                    <small className="text-muted">View Details &gt;</small>
+                  </Card.Link>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+          {/* {this.props.checkins.map((checkin, index) ==> <CheckInCards key=>{index} checkin={checkin}/)} */}
+        </Container>
       </Container>
     );
   }
