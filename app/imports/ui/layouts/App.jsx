@@ -14,7 +14,7 @@ import Clearance from '../components/Clearance';
 // import AddStuff from '../pages/AddStuff';
 // import EditStuff from '../pages/EditStuff';
 // import NotFound from '../pages/NotFound';
-// import Signin from '../pages/Signin';
+import Signin from '../pages/Signin';
 // import Signup from '../pages/Signup';
 // import Signout from '../pages/Signout';
 
@@ -29,6 +29,7 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/" component={Landing}/>
             <Route exact path="/dailycheck" component={DailyCheckup}/>
+            <Route exact path="/login" component={Signin}/>
             {/* <Route path="/signin" component={Signin}/>
             <Route path="/signup" component={Signup}/>
             <Route path="/signout" component={Signout}/>
