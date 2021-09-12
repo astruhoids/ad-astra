@@ -21,6 +21,7 @@ export default class Signin extends React.Component {
 
   // Update the form controls each time the user interacts with them.
   handleChange = (e, { name, value }) => {
+    console.log(e);
     this.setState({ [name]: value });
   }
 
@@ -45,7 +46,6 @@ export default class Signin extends React.Component {
     }
     // Otherwise return the Login form.
     return (
-
       <Container id="bg-image" className="d-flex" fluid>
         <Container id="signin-page">
           <Row md className="mt-4">
@@ -53,14 +53,19 @@ export default class Signin extends React.Component {
               <Card>
                 <Card.Header className="text-center">Account Login</Card.Header>
                 <Card.Body>
-                  <Form className="">
+                  <Form onSubmit={this.submit}>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                       <Form.Label>Email address</Form.Label>
                       <InputGroup>
                         <InputGroup.Text className="no-right-radius">
                           <FontAwesomeIcon icon={faUser} />
                         </InputGroup.Text>
-                        <Form.Control type="email" placeholder="E-mail address" />
+                        <Form.Control 
+                          name="email"
+                          type="email"
+                          placeholder="E-mail address"    
+                          onChange={this.handleChange}
+                          />
                       </InputGroup>
                     </Form.Group>
 
@@ -70,7 +75,12 @@ export default class Signin extends React.Component {
                         <InputGroup.Text className="no-right-radius">
                           <FontAwesomeIcon icon={faLock} />
                         </InputGroup.Text>
-                        <Form.Control type="password" placeholder="Password" />
+                        <Form.Control
+                          name="password"
+                          type="password"
+                          placeholder="Password"
+                          onChange={this.handleChange}
+                          />
                       </InputGroup>
                     </Form.Group>
                     <Button variant="secondary" type="submit" className="pl-3 pr-3">
@@ -79,6 +89,16 @@ export default class Signin extends React.Component {
                   </Form>
                 </Card.Body>
               </Card>
+              <Alert variant="secondary" className="mt-3">
+                <Link to="/signup">Click here to Register</Link>
+              </Alert>
+              {this.state.error === '' ? (
+                ''
+              ) : (
+                <Alert variant="danger" className="pl-0">
+                  Login was not successful: { this.state.error }
+                </Alert>
+              )}
             </Col>
           </Row>
         </Container>
