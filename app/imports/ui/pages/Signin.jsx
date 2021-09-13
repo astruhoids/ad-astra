@@ -75,7 +75,7 @@ export default class Signin extends React.Component {
                 ''
               ) : (
                 <Alert variant="danger" className="">
-                  Login was not successful: { this.state.error }
+                  Login failed - incorrect user or password
                 </Alert>
               )}
             </Col>
