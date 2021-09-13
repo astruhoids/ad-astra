@@ -47,7 +47,7 @@ class Clearance extends React.Component {
         break;
     }
     return (
-      <Row>
+      <Row className="pt-3">
         <Col>
           <Alert variant={this.props.variant}>
             <Alert.Heading>Status - {status}</Alert.Heading>
