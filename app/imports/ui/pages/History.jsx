@@ -1,59 +1,35 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Card, Row, Col } from 'react-bootstrap';
-import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
+import {  Container, Row } from 'react-bootstrap';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-// import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Stuffs } from '../../api/stuff/Stuff';
-// import CheckInCards from '../components/CheckInCards';
 import { HealthStatus } from '../../api/healthstatus/HealthStatus';
+import CrewmateCard from '../components/CrewmateCard';
+import ImposterCard from '../components/ImposterCard';
 
 /** Renders a table containing all of the Stuff documents. Use <CheckInCards> to render each card. */
 class History extends React.Component {
 
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
   render() {
-    return (this.props.ready) ? this.renderPage() : <h3 className='text-center'>Getting Data</h3>;
+    return (this.props.ready) ? this.renderPage() : '';
   }
 
   // Render the page once subscriptions have been received.
   renderPage() {
     return (
-      <Container id="bg-image">
+      <Container id="bg-image" className="d-flex" fluid>
         <Container id="history">
-          <Row xs={1} md={1} className="g-4">
-            <Col>
-              <Card>
-                <Card.Body>
-                  <Card.Text>Sep 8, 2021 at 7:36 AM</Card.Text>
-                  <Card.Title color='green'>
-                    <FontAwesomeIcon icon={faCheck} className="mr-2" color='green'/>
-                  You may report to campus / Anyone in Quarantine MUST continue to adhere to location restrictions
-                  </Card.Title>
-                  <hr />
-                  <Card.Link href='/'>
-                    <small className="text-muted">View Details &gt;</small>
-                  </Card.Link>
-                </Card.Body>
-              </Card>
-              <Card>
-                <Card.Body>
-                  <Card.Text>Sep 7, 2021 at 7:00 AM</Card.Text>
-                  <Card.Title>
-                    <FontAwesomeIcon icon={faTimes} className="mr-2" color='red'/>
-                  Stay home or in your campus residence. DO NOT report to campus. DO NOT attend UH in-person events or activities.
-                  </Card.Title>
-                  <hr />
-                  <Card.Link href='/'>
-                    <small className="text-muted">View Details &gt;</small>
-                  </Card.Link>
-                </Card.Body>
-              </Card>
-            </Col>
+          <Row xs={1}>
+            {this.props.health.map((health, index) => {
+              switch (health.status) {
+              case 'crewmate': return <Row><CrewmateCard key={index} health={health}/></Row>;
+              case 'imposter': return <Row><ImposterCard key={index} health={health}/></Row>;
+              default:
+                return '';
+              }
+            })}
           </Row>
-          {/* {this.props.checkins.map((checkin, index) ==> <CheckInCards key=>{index} checkin={checkin}/)} */}
         </Container>
       </Container>
     );
