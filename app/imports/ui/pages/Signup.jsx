@@ -69,8 +69,8 @@ class Signup extends React.Component {
                 <Card.Header className="text-center">Account Registration</Card.Header>
                 <Card.Body>
                   <AutoForm ref={ref => {fRef = ref}} schema={bridge} onSubmit={data => this.submit(data, fRef)}>
-                    <TextField type="email" name="email"/>
-                    <TextField type="password" name="password"/>
+                    <TextField type="email" name="email" placeholder="user@example.com"/>
+                    <TextField type="password" name="password" placeholder="SuperSecretPassword"/>
                     <SubmitField inputClassName="btn btn-secondary pl-3 pr-3" value="Create Account"/>
                   </AutoForm>
                 </Card.Body>
