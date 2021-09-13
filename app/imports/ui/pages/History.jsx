@@ -8,8 +8,9 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Stuffs } from '../../api/stuff/Stuff';
 // import CheckInCards from '../components/CheckInCards';
+import { HealthStatus } from '../../api/healthstatus/HealthStatus';
 
-/** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
+/** Renders a table containing all of the Stuff documents. Use <CheckInCards> to render each card. */
 class History extends React.Component {
 
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
@@ -59,22 +60,22 @@ class History extends React.Component {
   }
 }
 
-// Require an array of Stuff documents in the props.
+// Require an array of HealthStatus documents in the props.
 History.propTypes = {
-  stuffs: PropTypes.array.isRequired,
+  health: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
 export default withTracker(() => {
-  // Get access to Stuff documents.
-  const subscription = Meteor.subscribe(Stuffs.userPublicationName);
+  // Get access to HealthStatus documents.
+  const subscription = Meteor.subscribe(HealthStatus.userPublicationName);
   // Determine if the subscription is ready
   const ready = subscription.ready();
-  // Get the Stuff documents
-  const stuffs = Stuffs.collection.find({}).fetch();
+  // Get the Health documents
+  const health = HealthStatus.collection.find({}).fetch();
   return {
-    stuffs,
+    health,
     ready,
   };
 })(History);

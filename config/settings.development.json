@@ -5,9 +5,8 @@
   ],
 
   "defaultData": [
-    { "name": "Basket", "quantity": 3, "owner": "john@foo.com", "condition": "excellent" },
-    { "name": "Bicycle", "quantity": 2, "owner": "john@foo.com", "condition": "poor" },
-    { "name": "Banana", "quantity": 2, "owner": "admin@foo.com", "condition": "good" },
-    { "name": "Boogie Board", "quantity": 2, "owner": "admin@foo.com", "condition": "excellent" }
+    { "user": "john@foo.com", "cleared": true, "status": "crewmate", "date": "2021-09-1207:30" },
+    { "user": "john@foo.com", "cleared": true, "status": "imposter", "date": "2021-09-1207:30" },
+    { "user": "john@foo.com", "cleared": false, "status": "sus", "date": "2021-09-1207:30" },
   ]
 }
