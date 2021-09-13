@@ -1,11 +1,12 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import {  Container, Row } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { HealthStatus } from '../../api/healthstatus/HealthStatus';
 import CrewmateCard from '../components/CrewmateCard';
 import ImposterCard from '../components/ImposterCard';
+import Clearance from '../components/Clearance';
 
 /** Renders a table containing all of the Stuff documents. Use <CheckInCards> to render each card. */
 class History extends React.Component {
@@ -21,14 +22,16 @@ class History extends React.Component {
       <Container id="bg-image" className="d-flex" fluid>
         <Container id="history">
           <Row xs={1}>
-            {this.props.health.map((health, index) => {
-              switch (health.status) {
-              case 'crewmate': return <Row><CrewmateCard key={index} health={health}/></Row>;
-              case 'imposter': return <Row><ImposterCard key={index} health={health}/></Row>;
-              default:
-                return '';
-              }
-            })}
+            <Col>
+              {this.props.health.map((health, index) => {
+                switch (health.status) {
+                case 'crewmate': return <Row><CrewmateCard key={index} health={health}/></Row>;
+                case 'imposter': return <Row><ImposterCard key={index} health={health}/></Row>;
+                default:
+                  return '';
+                }
+              })}
+            </Col>
           </Row>
         </Container>
       </Container>
