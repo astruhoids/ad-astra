@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Alert, Button, Container } from 'react-bootstrap';
+import PropTypes from 'prop-types';
+import { Alert, Row, Col, Button, Container } from 'react-bootstrap';
 
 class Clearance extends React.Component {
   constructor(props) {
@@ -27,43 +28,39 @@ class Clearance extends React.Component {
   }
 
   render() {
+    let status = null;
+    let msg = null;
+    switch (this.props.variant) {
+      case 'success':
+        status = 'CREWMATE'
+        msg = (<p>
+          You may report to campus / Anyone in Quarantine MUST continue to adhere to location restrictions
+        </p>);
+        break;
+      case 'warning':
+        status = 'INCOMPLETE'
+        msg = (<p>You have not completed today's safety check</p>);
+        break;
+      case 'danger':
+        status = 'IMPOSTER'
+        msg = (<p>You may <strong>not</strong> report to campus</p>);
+        break;
+    }
     return (
-      <div id="clearance" className="d-flex justify-content-center fluid">
-        {this.state.hidden ?
-          <Alert style={{ marginBottom: '0px' }} variant={this.state.variant} onClose={this.handleDismiss} dismissible>
-            <Alert.Heading>Status - {this.state.status}:</Alert.Heading>
-            <Container>
-              {/* eslint-disable-next-line no-nested-ternary */}
-              {(this.state.cleared === true) ?
-                <Container>
-                  <p>
-                    You may report to campus / Anyone in Quarantine MUST continue to adhere to location restrictions
-                  </p>
-                </Container>
-                : (this.state.cleared === null) ?
-                  <Container>
-                    <p>
-                      You have not completed the safety requirements
-                    </p>
-                    <Button variant="Link" onClick={this.handleCheck}>
-                      <Link to='/dailycheck'>
-                        Check your Symptoms
-                      </Link>
-                    </Button>
-                  </Container>
-                  :
-                  <Container>
-                    <p>You may <strong>not</strong> report to campus.</p>
-                  </Container>
-              }
-            </Container>
+      <Row>
+        <Col>
+          <Alert variant={this.props.variant}>
+            <Alert.Heading>Status - {status}</Alert.Heading>
+            {msg}
           </Alert>
-          :
-          <Button onClick={this.handleDismiss}>Show Alert</Button>
-        }
-      </div>
+        </Col>
+      </Row>
     );
   }
 }
+
+Clearance.propTypes = {
+  variant: PropTypes.string.isRequired,
+};
 
 export default Clearance;
