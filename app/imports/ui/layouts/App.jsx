@@ -10,6 +10,7 @@ import Landing from '../pages/Landing';
 import DailyCheckup from '../pages/DailyCheckup';
 import Clearance from '../components/Clearance';
 import History from '../pages/History';
+import AddVaccine from '../pages/AddVaccine';
 // import ListStuff from '../pages/ListStuff';
 // import ListStuffAdmin from '../pages/ListStuffAdmin';
 // import AddStuff from '../pages/AddStuff';
@@ -34,6 +35,7 @@ class App extends React.Component {
             <Route path="/signup" component={Signup}/>
             <Route path="/signout" component={Signout}/>
             <Route exact path="/history" component={History}/>
+            <Route exact path="/vaccine" component={AddVaccine}/>
             {/* <Route path="/signin" component={Signin}/>
             <Route path="/signup" component={Signup}/>
             <Route path="/signout" component={Signout}/>
