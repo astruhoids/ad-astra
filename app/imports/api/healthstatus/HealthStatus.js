@@ -17,7 +17,10 @@ class HealthStatusCollection {
         allowedValues: ['crewmate', 'sus', 'imposter'],
         defaultValue: 'sus',
       },
-      date: Date,
+      date: {
+        type: Date,
+        defaultValue: new Date()
+      },
     }, { tracker: Tracker });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
     this.collection.attachSchema(this.schema);
