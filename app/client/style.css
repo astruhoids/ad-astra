@@ -13,6 +13,7 @@
     background: url('images/amongus-background.png');
     min-height: 720px;
     max-width: 100%;
+    margin-top: -0.7rem;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
