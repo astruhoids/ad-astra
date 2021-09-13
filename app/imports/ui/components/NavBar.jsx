@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { withRouter, NavLink } from 'react-router-dom';
-import { Navbar, Nav, NavDropdown, Dropdown, NavItem } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faUserMinus, faUserPlus, faUsersCog } from '@fortawesome/free-solid-svg-icons';
 import { Roles } from 'meteor/alanning:roles';
@@ -23,6 +23,7 @@ class NavBar extends React.Component {
           <Nav className="mr-auto">
             { this.props.currentUser ? (
               [<Nav.Link as={NavLink} activeClassName="active" exact to="/" key='home'>Home</Nav.Link>,
+                <Nav.Link as={NavLink} activeClassName="active" exact to="/dailycheck" key='dailycheck'>Daily Check</Nav.Link>,
                 <Nav.Link as={NavLink} activeClassName="active" exact to="/history" key='history'>History</Nav.Link>,
                 <Nav.Link as={NavLink} activeClassName="active" exact to="/vaccine" key='Vaccine'>Vaccine</Nav.Link>]
             ) : ''}
