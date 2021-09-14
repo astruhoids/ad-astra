@@ -32,7 +32,7 @@ class NavBar extends React.Component {
             ) : ''}
           </Nav>
           <Nav className="float-right">
-            <NavDropdown alignRight title={this.props.currentUser === '' ? (<span>Login&nbsp;<FontAwesomeIcon icon={faUser}/></span>) : (<span>{this.props.currentUser}<FontAwesomeIcon icon="user"/></span>)} id="login-dropdown">
+            <NavDropdown alignRight title={this.props.currentUser === '' ? (<span>Login&nbsp;<FontAwesomeIcon icon={faUser}/></span>) : (<span>{this.props.currentUser}&nbsp;<FontAwesomeIcon icon={faUser}/></span>)} id="login-dropdown">
               {this.props.currentUser === '' ? (
                 <>
                   <NavDropdown.Item as={NavLink} exact to="/login"><FontAwesomeIcon icon={faUser} className="mr-2"/>&nbsp;Sign In</NavDropdown.Item>
@@ -40,7 +40,7 @@ class NavBar extends React.Component {
                 </>
               ) : (
                 <>
-                  <NavDropdown.Item as={NavLink} exact to="/settings"><FontAwesomeIcon icon={faUsersCog} className="mr-1"/>&nbsp;Settings</NavDropdown.Item>
+                  <NavDropdown.Item as={NavLink} exact to="/userinfo"><FontAwesomeIcon icon={faUsersCog} className="mr-1"/>&nbsp;Settings</NavDropdown.Item>
                   <NavDropdown.Item as={NavLink} exact to="/signout"><FontAwesomeIcon icon={faUserMinus} className="mr-1"/>&nbsp;Sign Out</NavDropdown.Item>
                 </>
               )}
