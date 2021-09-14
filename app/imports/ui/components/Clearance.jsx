@@ -1,7 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Alert, Row, Col, Button, Container } from 'react-bootstrap';
+import { Alert, Row, Col } from 'react-bootstrap';
 
 class Clearance extends React.Component {
   constructor(props) {
@@ -45,12 +44,15 @@ class Clearance extends React.Component {
         break;
       case 'warning':
         status = 'INCOMPLETE'
-        msg = (<p>You have not completed today's safety check</p>);
+        msg = (<p>You have not completed today&apos;s safety check</p>);
         break;
       case 'danger':
         status = 'IMPOSTER'
         msg = (<p>You may <strong>not</strong> report to campus</p>);
         break;
+      default:
+        status = 'INCOMPLETE'
+        msg = (<p>You have not completed today's safety check</p>);
     }
     return (
       <Row className="pt-3">
