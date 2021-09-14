@@ -2,6 +2,8 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { Button, Container, Row, Col, Card } from 'react-bootstrap';
 import Clearance from '../components/Clearance';
+import swal from 'sweetalert';
+import { HealthStatus } from '../../api/healthstatus/HealthStatus';
 
 /** A simple static component to render some text for the landing page. */
 class DailyCheckup extends React.Component {
@@ -10,9 +12,18 @@ class DailyCheckup extends React.Component {
     this.state = { choice: null, redirectToReferer: false };
   }
 
-  submit(e) {
-    const option = e === 'true';
-    this.setState({ choice: option, redirectToReferer: true });
+  submit(isCleared) {
+    HealthStatus.collection.insert({
+      user: Meteor.user().username,
+      cleared: isCleared
+    });
+    const msg = isCleared ? 'You may report to campus' : 'You are not cleared to visit campus'
+    const icon = isCleared ? 'success' : 'error';
+    swal('Health check recorded', msg, icon)
+      .then((value) => {
+        // reloads page when swal is closed
+        window.location.reload(false);
+      });
   }
 
   render() {
@@ -96,8 +107,7 @@ class DailyCheckup extends React.Component {
                         <Button 
                           variant='dark'
                           className='landing-btns'
-                          value={true} 
-                          onClick={e => this.submit(e.target.value)}>
+                          onClick={e => this.submit(false)}>
                           Yes
                         </Button>
                     </Col>
@@ -105,8 +115,7 @@ class DailyCheckup extends React.Component {
                         <Button 
                           variant='dark'
                           className='landing-btns'
-                          value={false} 
-                          onClick={e => this.submit(e.target.value)}>
+                          onClick={e => this.submit(true)}>
                           No
                         </Button>
                     </Col>
