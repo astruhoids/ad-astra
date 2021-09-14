@@ -2,7 +2,6 @@ import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { Stuffs } from '../../api/stuff/Stuff';
 import { HealthStatus } from '../../api/healthstatus/HealthStatus';
-<<<<<<< HEAD
 import { UserInformation } from '../../api/healthstatus/UserInformation';
 
 Meteor.publish(HealthStatus.userPublicationName, () => {
@@ -34,8 +33,6 @@ Meteor.publish(UserInformation.adminPublicationName, () => {
   }
   return this.ready();
 });
-=======
->>>>>>> aa4d623979bd6052647a04975a368baa5cd9ca02
 
 // // User-level publication.
 // // If logged in, then publish documents owned by this user. Otherwise publish nothing.
@@ -55,14 +52,6 @@ Meteor.publish(UserInformation.adminPublicationName, () => {
 //   }
 //   return this.ready();
 // });
-
-Meteor.publish(HealthStatus.userPublicationName, function () {
-  if (this.userId) {
-    const username = Meteor.users.findOne(this.userId).username;
-    return HealthStatus.collection.find({ user: username });
-  }
-  return this.ready();
-});
 
 // alanning:roles publication
 // Recommended code to publish roles for each user.
