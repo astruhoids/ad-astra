@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { HealthStatus } from '../../api/healthstatus/HealthStatus';
-import { UserInformation } from '../../api/healthstatus/UserInformation';
+import { UserInformation } from '../../api/userinformation/UserInformation';
 
 Meteor.publish(HealthStatus.userPublicationName, () => {
   if (this.userId) {

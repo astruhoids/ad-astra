@@ -12,11 +12,6 @@ class HealthStatusCollection {
     this.schema = new SimpleSchema({
       user: String,
       cleared: Boolean,
-      status: {
-        type: String,
-        allowedValues: ['crewmate', 'sus', 'imposter'],
-        defaultValue: 'sus',
-      },
       date: Date,
     }, { tracker: Tracker });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.

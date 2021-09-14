@@ -12,7 +12,7 @@ class UserInformationCollection {
     this.schema = new SimpleSchema({
       user: String,
       cleared: Boolean,
-      status: {
+      campus: {
         type: String,
         allowedValues: [
             'UH Manoa', 
