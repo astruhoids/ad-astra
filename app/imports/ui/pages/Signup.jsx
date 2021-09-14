@@ -76,7 +76,7 @@ class Signup extends React.Component {
                 </Card.Body>
               </Card>
               <Alert variant="secondary" className="mt-3">
-                Already have an account? Click <Link to="/signup">here</Link> to signin.
+                Already have an account? Click <Link to="/login">here</Link> to signin.
               </Alert>
               {this.state.error === '' ? (
                 ''

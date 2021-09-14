@@ -25,14 +25,14 @@ class App extends React.Component {
           <NavBar/>
           <Switch>
             <Route exact path="/" component={Landing}/>
-            <Route exact path="/Home" component={Home}/>
-            <Route exact path="/dailycheck" component={DailyCheckup}/>
             <Route exact path="/login" component={Signin}/>
             <Route path="/signup" component={Signup}/>
-            <Route path="/signout" component={Signout}/>
-            <Route exact path="/history" component={History}/>
-            <Route exact path="/vaccine" component={AddVaccine}/>
-            <Route exact path="/userinfo" component={UserInformationPage}/>
+            <ProtectedRoute path="/signout" component={Signout}/>
+            <ProtectedRoute exact path="/Home" component={Home}/>
+            <ProtectedRoute exact path="/dailycheck" component={DailyCheckup}/>
+            <ProtectedRoute exact path="/history" component={History}/>
+            <ProtectedRoute exact path="/vaccine" component={AddVaccine}/>
+            <ProtectedRoute exact path="/userinfo" component={UserInformationPage}/>
             {/* <Route path="/signin" component={Signin}/>
             <Route path="/signup" component={Signup}/>
             <Route path="/signout" component={Signout}/>
@@ -61,7 +61,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => (
       const isLogged = Meteor.userId() !== null;
       return isLogged ?
         (<Component {...props} />) :
-        (<Redirect to={{ pathname: '/signin', state: { from: props.location } }}/>
+        (<Redirect to={{ pathname: '/login', state: { from: props.location } }}/>
         );
     }}
   />
@@ -80,7 +80,7 @@ const AdminProtectedRoute = ({ component: Component, ...rest }) => (
       const isAdmin = Roles.userIsInRole(Meteor.userId(), 'admin');
       return (isLogged && isAdmin) ?
         (<Component {...props} />) :
-        (<Redirect to={{ pathname: '/signin', state: { from: props.location } }}/>
+        (<Redirect to={{ pathname: '/login', state: { from: props.location } }}/>
         );
     }}
   />

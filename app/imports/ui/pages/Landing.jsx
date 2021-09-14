@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Col, Row, Button, Image } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 /** A simple static component to render some text for the landing page. */
 class Landing extends React.Component {
@@ -16,8 +17,8 @@ class Landing extends React.Component {
             </Row>
             <Row>
               <Col>
-                <Button className="landing-btns" variant="primary" size="lg">Login</Button>
-                <Button className="landing-btns" variant="secondary" size="lg">New User?</Button>
+                <Link to='/login'><Button className="landing-btns" variant="primary" size="lg">Login</Button></Link>
+                <Link to='/signup'><Button className="landing-btns" variant="secondary" size="lg">New User?</Button></Link>
               </Col>
             </Row>
           </Container>

@@ -10,11 +10,17 @@ import { Roles } from 'meteor/alanning:roles';
 
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
 class NavBar extends React.Component {
+
+  // If the subscription(s) have been received, render the page, otherwise show a loading icon.
   render() {
-    const menuStyle = { marginBottom: '10px' };
+    return (this.props.currentUser) === '' ? '' : this.renderNavBar();
+  }
+
+  renderNavBar() {
+    const menuStyle = { margin: '10px' };
     return (
       <Navbar style={menuStyle} bg='dark' variant="dark" expand="lg">
-        <Navbar.Brand as={NavLink} activeClassName="" exact to="/">
+        <Navbar.Brand as={NavLink} activeClassName="" exact to={'/home'}>
           <img alt="" src="../images/yellowpng.png" width="35" height="35" className="d-inline-block align-top"/>{' '}
               Ad Astra
         </Navbar.Brand>

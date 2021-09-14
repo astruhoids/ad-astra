@@ -4,17 +4,19 @@ import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import { Link } from 'react-router-dom';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faCheckCircle, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import CrewmateCard from '../components/CrewmateCard';
-import ImposterCard from '../components/ImposterCard';
+import CheckInCards from '../components/CheckInCards';
 import { HealthStatus } from '../../api/healthstatus/HealthStatus';
 
 /** A simple static component to render some text for the landing page. */
 class Home extends React.Component {
   render() {
+
+    const dailychecks = this.props.health.sort((a, b) => (a.date.getDate() < b.date.getDate() ? 1 : -1));
+
     return (
-      <Container id="bg-image" className="d-flex" fluid>
+      <Container fluid>
         <Container id="home">
           <h1 style={{ color: 'white' }}>On-campus check-in</h1>
           <Row xs={1}>
@@ -29,7 +31,7 @@ class Home extends React.Component {
                       <li>Keep track of your symptoms every day.</li>
                     </ol>
                   </Card.Text>
-                  <Link to='/dailycheck' ><Button variant="outline-info" size='lg'>
+                  <Link to='/dailycheck'><Button variant="outline-info" size='lg'>
                     <FontAwesomeIcon icon={faHeart} className="mr-2"/>
                   Check Your Symptoms
                   </Button></Link>
@@ -78,18 +80,13 @@ class Home extends React.Component {
                   </ListGroup>
                 </Card.Body>
               </Card>
-              {this.props.health.map((health, index) => {
-                switch (health.cleared) {
-                case true: return <Row><CrewmateCard key={index} health={health}/></Row>;
-                case false: return <Row><ImposterCard key={index} health={health}/></Row>;
-                default:
-                  return '';
-                }
-              })}
+              <h1 style={{ color: 'white' }} className="mb-4">Check-in History</h1>
+              {dailychecks.map((health) => <CheckInCards key={health._id} health={health}/>)}
             </Col>
           </Row>
         </Container>
       </Container>
+
     );
   }
 }
@@ -99,7 +96,6 @@ Home.propTypes = {
   health: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
-
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
 export default withTracker(() => {
   // Get access to HealthStatus documents.

@@ -4,8 +4,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { HealthStatus } from '../../api/healthstatus/HealthStatus';
-import CrewmateCard from '../components/CrewmateCard';
-import ImposterCard from '../components/ImposterCard';
+import CheckInCards from '../components/CheckInCards';
 import Clearance from '../components/Clearance';
 
 /** Renders a table containing all of the Stuff documents. Use <CheckInCards> to render each card. */
@@ -18,19 +17,14 @@ class History extends React.Component {
 
   // Render the page once subscriptions have been received.
   renderPage() {
+
+    const dailychecks = this.props.health.sort((a, b) => (a.date.getDate() < b.date.getDate() ? 1 : -1));
+
     return (
-      <Container id="bg-image" className="d-flex" fluid>
+      <Container className="d-flex" fluid>
         <Container id="history">
-          <Row xs={1}>
-            {this.props.health.map((health, index) => {
-              switch (health.cleared) {
-              case true: return <Row><CrewmateCard key={index} health={health}/></Row>;
-              case false: return <Row><ImposterCard key={index} health={health}/></Row>;
-              default:
-                return '';
-              }
-            })}
-          </Row>
+          <h1 style={{ color: 'white' }} className="mb-4">Check-in History</h1>
+          {dailychecks.map((health) => <CheckInCards key={health._id} health={health}/>)}
         </Container>
       </Container>
     );
