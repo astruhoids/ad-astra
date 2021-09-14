@@ -6,31 +6,37 @@ import { Alert, Row, Col, Button, Container } from 'react-bootstrap';
 class Clearance extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { cleared: null, status: 'INCOMPLETE', variant: 'warning', hidden: false };
-    this.handleCheck = this.handleCheck.bind(this);
-    this.handleDismiss = this.handleDismiss.bind(this);
-
-  }
-
-  handleCheck() {
-    // If they click no, no symptoms
-    this.setState({ cleared: true, status: 'CREWMATE', variant: 'success' });
-    // if they click yes, have symptoms
-    this.setState({ cleared: false, status: 'IMPOSTER', variant: 'danger' });
-  }
-
-  handleDismiss() {
-    if (this.state.hidden === true) {
-      this.setState({ hidden: false });
-    } else if (this.state.hidden === false) {
-      this.setState({ hidden: true });
+    // Check if daily check was done
+    let dailyCheckDone = false;
+    const now = new Date();
+    for (const ele of this.props.statuses) {
+      if (now.getDate() === ele.date.getDate() && now.getMonth() === ele.date.getMonth() &&
+        now.getFullYear() === ele.date.getFullYear()
+        ) {
+        dailyCheckDone = true;
+        break;
+      }
+    }
+    // if check was not done
+    if (!dailyCheckDone) {
+      this.state = { variant: 'warning'};
+    } else {
+      // get latest status
+      let latest = this.props.statuses[0];
+      console.log(this.props.statuses);
+      for (const ele of this.props.statuses) {
+        if (latest.date.getTime() < ele.date.getTime()) {
+          latest = ele;
+        }
+      }
+      this.state = { variant: latest.cleared ? 'success' : 'danger' };
     }
   }
 
   render() {
     let status = null;
     let msg = null;
-    switch (this.props.variant) {
+    switch (this.state.variant) {
       case 'success':
         status = 'CREWMATE'
         msg = (<p>
@@ -49,7 +55,7 @@ class Clearance extends React.Component {
     return (
       <Row className="pt-3">
         <Col>
-          <Alert variant={this.props.variant}>
+          <Alert variant={this.state.variant}>
             <Alert.Heading>Status - {status}</Alert.Heading>
             {msg}
           </Alert>
@@ -60,7 +66,7 @@ class Clearance extends React.Component {
 }
 
 Clearance.propTypes = {
-  variant: PropTypes.string.isRequired,
+  statuses: PropTypes.array.isRequired
 };
 
 export default Clearance;
