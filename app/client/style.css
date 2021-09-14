@@ -51,3 +51,14 @@
     margin-top: 5rem;
     margin-bottom: 5rem;
 }
+
+#home {
+    border-radius: 15px;
+    padding: 2.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 5rem;
+}
+
+#home-vaccine-card > ListGroupItem {
+    border: 0px !important;
+}
