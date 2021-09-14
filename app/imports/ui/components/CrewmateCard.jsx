@@ -35,7 +35,6 @@ class CrewmateCard extends React.Component {
 CrewmateCard.propTypes = {
   health: PropTypes.shape({
     date: PropTypes.instanceOf(Date),
-    status: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
 };

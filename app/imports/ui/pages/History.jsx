@@ -22,16 +22,14 @@ class History extends React.Component {
       <Container id="bg-image" className="d-flex" fluid>
         <Container id="history">
           <Row xs={1}>
-            <Col>
-              {this.props.health.map((health, index) => {
-                switch (health.status) {
-                case true: return <Row><CrewmateCard key={index} health={health}/></Row>;
-                case false: return <Row><ImposterCard key={index} health={health}/></Row>;
-                default:
-                  return '';
-                }
-              })}
-            </Col>
+            {this.props.health.map((health, index) => {
+              switch (health.cleared) {
+              case true: return <Row><CrewmateCard key={index} health={health}/></Row>;
+              case false: return <Row><ImposterCard key={index} health={health}/></Row>;
+              default:
+                return '';
+              }
+            })}
           </Row>
         </Container>
       </Container>

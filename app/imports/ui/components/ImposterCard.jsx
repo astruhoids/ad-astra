@@ -35,7 +35,6 @@ class ImposterCard extends React.Component {
 ImposterCard.propTypes = {
   health: PropTypes.shape({
     date: PropTypes.instanceOf(Date),
-    status: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
 };

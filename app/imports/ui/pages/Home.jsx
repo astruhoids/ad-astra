@@ -79,9 +79,9 @@ class Home extends React.Component {
                 </Card.Body>
               </Card>
               {this.props.health.map((health, index) => {
-                switch (health.status) {
-                case 'crewmate': return <Row><CrewmateCard key={index} health={health}/></Row>;
-                case 'imposter': return <Row><ImposterCard key={index} health={health}/></Row>;
+                switch (health.cleared) {
+                case true: return <Row><CrewmateCard key={index} health={health}/></Row>;
+                case false: return <Row><ImposterCard key={index} health={health}/></Row>;
                 default:
                   return '';
                 }

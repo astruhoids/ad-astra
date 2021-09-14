@@ -5,7 +5,7 @@
   ],
 
   "defaultData": [
-    { "user": "john@foo.com", "cleared": true, "status": "crewmate", "date": "2021-09-12T07:30" },
-    { "user": "john@foo.com", "cleared": false, "status": "imposter", "date": "2021-09-12T07:30" }
+    { "user": "john@foo.com", "cleared": true, "date": "2021-09-12T07:30" },
+    { "user": "john@foo.com", "cleared": false, "date": "2021-09-10T07:30" }
   ]
 }
