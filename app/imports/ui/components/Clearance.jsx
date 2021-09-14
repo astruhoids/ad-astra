@@ -5,30 +5,23 @@ import { Alert, Row, Col } from 'react-bootstrap';
 class Clearance extends React.Component {
   constructor(props) {
     super(props);
+
     // Check if daily check was done
-    let dailyCheckDone = false;
     const now = new Date();
-    for (const ele of this.props.statuses) {
-      if (now.getDate() === ele.date.getDate() && now.getMonth() === ele.date.getMonth() &&
-        now.getFullYear() === ele.date.getFullYear()
-        ) {
-        dailyCheckDone = true;
-        break;
-      }
-    }
+    const dailyCheckDone = this.props.statuses.some((ele) => now.getDate() === ele.date.getDate() &&
+      now.getMonth() === ele.date.getMonth() && now.getFullYear() === ele.date.getFullYear());
+    
     // if check was not done
     if (!dailyCheckDone) {
-      this.state = { variant: 'warning'};
+      this.state = { variant: 'warning' };
     } else {
       // get latest status
-      let latest = this.props.statuses[0];
-      console.log(this.props.statuses);
-      for (const ele of this.props.statuses) {
-        if (latest.date.getTime() < ele.date.getTime()) {
-          latest = ele;
-        }
-      }
-      this.state = { variant: latest.cleared ? 'success' : 'danger' };
+      // sorts this.props.statuses by epoch 
+      this.props.statuses.sort((a, b) => {
+        return a.date.getTime() - b.date.getTime();
+      });
+
+      this.state = { variant: this.props.statuses.pop().cleared ? 'success' : 'danger' };
     }
   }
 
@@ -36,23 +29,23 @@ class Clearance extends React.Component {
     let status = null;
     let msg = null;
     switch (this.state.variant) {
-      case 'success':
-        status = 'CREWMATE'
-        msg = (<p>
+    case 'success':
+      status = 'CREWMATE';
+      msg = (<p>
           You may report to campus / Anyone in Quarantine MUST continue to adhere to location restrictions
-        </p>);
-        break;
-      case 'warning':
-        status = 'INCOMPLETE'
-        msg = (<p>You have not completed today&apos;s safety check</p>);
-        break;
-      case 'danger':
-        status = 'IMPOSTER'
-        msg = (<p>You may <strong>not</strong> report to campus</p>);
-        break;
-      default:
-        status = 'INCOMPLETE'
-        msg = (<p>You have not completed today's safety check</p>);
+      </p>);
+      break;
+    case 'warning':
+      status = 'INCOMPLETE';
+      msg = (<p>You have not completed today&apos;s safety check</p>);
+      break;
+    case 'danger':
+      status = 'IMPOSTER';
+      msg = (<p>You may <strong>not</strong> report to campus</p>);
+      break;
+    default:
+      status = 'INCOMPLETE';
+      msg = (<p>You have not completed today&apos;s safety check</p>);
     }
     return (
       <Row className="pt-3">
@@ -68,7 +61,7 @@ class Clearance extends React.Component {
 }
 
 Clearance.propTypes = {
-  statuses: PropTypes.array.isRequired
+  statuses: PropTypes.array.isRequired,
 };
 
 export default Clearance;
