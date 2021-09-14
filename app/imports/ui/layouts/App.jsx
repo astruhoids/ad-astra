@@ -9,14 +9,11 @@ import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import DailyCheckup from '../pages/DailyCheckup';
 import History from '../pages/History';
-// import ListStuff from '../pages/ListStuff';
-// import ListStuffAdmin from '../pages/ListStuffAdmin';
-// import AddStuff from '../pages/AddStuff';
-// import EditStuff from '../pages/EditStuff';
-// import NotFound from '../pages/NotFound';
+import AddVaccine from '../pages/AddVaccine';
 import Signin from '../pages/Signin';
 import Signup from '../pages/Signup';
 import Signout from '../pages/Signout';
+import UserInformationPage from '../pages/UserInformationPage';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -32,6 +29,8 @@ class App extends React.Component {
             <Route path="/signup" component={Signup}/>
             <Route path="/signout" component={Signout}/>
             <Route exact path="/history" component={History}/>
+            <Route exact path="/vaccine" component={AddVaccine}/>
+            <Route exact path="/userinfo" component={UserInformationPage}/>
             {/* <Route path="/signin" component={Signin}/>
             <Route path="/signup" component={Signup}/>
             <Route path="/signout" component={Signout}/>
