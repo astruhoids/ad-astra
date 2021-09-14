@@ -8,7 +8,6 @@ import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import DailyCheckup from '../pages/DailyCheckup';
-import Clearance from '../components/Clearance';
 import History from '../pages/History';
 import AddVaccine from '../pages/AddVaccine';
 import Signin from '../pages/Signin';
@@ -23,7 +22,6 @@ class App extends React.Component {
       <Router>
         <div>
           <NavBar/>
-          <Clearance />
           <Switch>
             <Route exact path="/" component={Landing}/>
             <Route exact path="/dailycheck" component={DailyCheckup}/>

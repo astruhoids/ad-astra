@@ -1,69 +1,72 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Alert, Button, Container } from 'react-bootstrap';
+import PropTypes from 'prop-types';
+import { Alert, Row, Col, Button, Container } from 'react-bootstrap';
 
 class Clearance extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { cleared: null, status: 'INCOMPLETE', variant: 'warning', hidden: false };
-    this.handleCheck = this.handleCheck.bind(this);
-    this.handleDismiss = this.handleDismiss.bind(this);
-
-  }
-
-  handleCheck() {
-    // If they click no, no symptoms
-    this.setState({ cleared: true, status: 'CREWMATE', variant: 'success' });
-    // if they click yes, have symptoms
-    this.setState({ cleared: false, status: 'IMPOSTER', variant: 'danger' });
-  }
-
-  handleDismiss() {
-    if (this.state.hidden === true) {
-      this.setState({ hidden: false });
-    } else if (this.state.hidden === false) {
-      this.setState({ hidden: true });
+    // Check if daily check was done
+    let dailyCheckDone = false;
+    const now = new Date();
+    for (const ele of this.props.statuses) {
+      if (now.getDate() === ele.date.getDate() && now.getMonth() === ele.date.getMonth() &&
+        now.getFullYear() === ele.date.getFullYear()
+        ) {
+        dailyCheckDone = true;
+        break;
+      }
+    }
+    // if check was not done
+    if (!dailyCheckDone) {
+      this.state = { variant: 'warning'};
+    } else {
+      // get latest status
+      let latest = this.props.statuses[0];
+      console.log(this.props.statuses);
+      for (const ele of this.props.statuses) {
+        if (latest.date.getTime() < ele.date.getTime()) {
+          latest = ele;
+        }
+      }
+      this.state = { variant: latest.cleared ? 'success' : 'danger' };
     }
   }
 
   render() {
+    let status = null;
+    let msg = null;
+    switch (this.state.variant) {
+      case 'success':
+        status = 'CREWMATE'
+        msg = (<p>
+          You may report to campus / Anyone in Quarantine MUST continue to adhere to location restrictions
+        </p>);
+        break;
+      case 'warning':
+        status = 'INCOMPLETE'
+        msg = (<p>You have not completed today's safety check</p>);
+        break;
+      case 'danger':
+        status = 'IMPOSTER'
+        msg = (<p>You may <strong>not</strong> report to campus</p>);
+        break;
+    }
     return (
-      <div id="clearance" className="d-flex justify-content-center fluid">
-        {this.state.hidden ?
-          <Alert style={{ marginBottom: '0px' }} variant={this.state.variant} onClose={this.handleDismiss} dismissible>
-            <Alert.Heading>Status - {this.state.status}:</Alert.Heading>
-            <Container>
-              {/* eslint-disable-next-line no-nested-ternary */}
-              {(this.state.cleared === true) ?
-                <Container>
-                  <p>
-                    You may report to campus / Anyone in Quarantine MUST continue to adhere to location restrictions
-                  </p>
-                </Container>
-                : (this.state.cleared === null) ?
-                  <Container>
-                    <p>
-                      You have not completed the safety requirements
-                    </p>
-                    <Button variant="Link" onClick={this.handleCheck}>
-                      <Link to='/dailycheck'>
-                        Check your Symptoms
-                      </Link>
-                    </Button>
-                  </Container>
-                  :
-                  <Container>
-                    <p>You may <strong>not</strong> report to campus.</p>
-                  </Container>
-              }
-            </Container>
+      <Row className="pt-3">
+        <Col>
+          <Alert variant={this.state.variant}>
+            <Alert.Heading>Status - {status}</Alert.Heading>
+            {msg}
           </Alert>
-          :
-          <Button onClick={this.handleDismiss}>Show Alert</Button>
-        }
-      </div>
+        </Col>
+      </Row>
     );
   }
 }
+
+Clearance.propTypes = {
+  statuses: PropTypes.array.isRequired
+};
 
 export default Clearance;

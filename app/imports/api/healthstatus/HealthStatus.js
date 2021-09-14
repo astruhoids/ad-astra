@@ -12,7 +12,10 @@ class HealthStatusCollection {
     this.schema = new SimpleSchema({
       user: String,
       cleared: Boolean,
-      date: Date,
+      date: {
+        type: Date,
+        defaultValue: new Date()
+      },
     }, { tracker: Tracker });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
     this.collection.attachSchema(this.schema);
