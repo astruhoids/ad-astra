@@ -1,6 +1,8 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { Button, Container, Row, Col, Card } from 'react-bootstrap';
+import { withTracker } from 'meteor/react-meteor-data';
+import PropTypes from 'prop-types';
 import Clearance from '../components/Clearance';
 import swal from 'sweetalert';
 import { HealthStatus } from '../../api/healthstatus/HealthStatus';
@@ -31,12 +33,15 @@ class DailyCheckup extends React.Component {
     if (this.state.redirectToReferer) {
       return <Redirect to={{ pathname: '/' }}/>;
     }
+    return (this.props.ready) ? this.renderPage() : '';
+  }
 
+  renderPage() {
     return (
       <div>
         <Container id="bg-image" className="d-flex" fluid>
           <Container className="mb-3">
-          <Clearance variant="warning"/>
+          <Clearance statuses={this.props.statuses}/>
           <Row>
             <Col>
               <Card>
@@ -120,6 +125,11 @@ class DailyCheckup extends React.Component {
                         </Button>
                     </Col>
                   </Row>
+                  <Row>
+                    <Col className="text-center pt-2">
+                    <p>New submissions will update your status</p>
+                    </Col>
+                  </Row>
                 </Card.Body>
               </Card>
             </Col>
@@ -127,8 +137,22 @@ class DailyCheckup extends React.Component {
           </Container>
         </Container>
       </div>
-    );
+    );    
   }
 }
 
-export default DailyCheckup;
+DailyCheckup.propTypes = {
+  ready: PropTypes.bool.isRequired,
+  statuses: PropTypes.array.isRequired
+};
+
+export default withTracker(() => {
+  const subscription = Meteor.subscribe(HealthStatus.userPublicationName);
+  const ready = subscription.ready();
+  const statuses = HealthStatus.collection.find({}).fetch();
+  return {
+    ready,
+    statuses
+  };
+})(DailyCheckup);
+
