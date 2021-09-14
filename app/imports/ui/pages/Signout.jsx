@@ -1,15 +1,23 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Header } from 'semantic-ui-react';
+import { Container, Alert, Row, Col } from 'react-bootstrap';
 
 /** After the user clicks the "Signout" link in the NavBar, log them out and display this page. */
 export default class Signout extends React.Component {
   render() {
     Meteor.logout();
     return (
-      <Header id="signout-page" as="h2" textAlign="center">
-        <p>You are signed out.</p>
-      </Header>
+      <Container id="bg-image" className="d-flex" fluid>
+        <Container id="signout-page">
+          <Row md className="mt-4">
+            <Col md={{ span: 8, offset: 2 }}>
+              <Alert variant="info" className="text-center">
+                <h2>You have been signed out.</h2>
+              </Alert>
+            </Col>
+          </Row>
+        </Container>
+      </Container>
     );
   }
 }
