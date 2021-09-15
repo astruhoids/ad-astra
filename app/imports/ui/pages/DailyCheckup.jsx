@@ -3,8 +3,9 @@ import { Redirect } from 'react-router-dom';
 import { Button, Container, Row, Col, Card } from 'react-bootstrap';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import Clearance from '../components/Clearance';
 import swal from 'sweetalert';
+import Meteor from 'metoer/meteor';
+import Clearance from '../components/Clearance';
 import { HealthStatus } from '../../api/healthstatus/HealthStatus';
 
 /** A simple static component to render some text for the landing page. */
@@ -17,14 +18,14 @@ class DailyCheckup extends React.Component {
   submit(isCleared) {
     HealthStatus.collection.insert({
       user: Meteor.user().username,
-      cleared: isCleared
+      cleared: isCleared,
     });
-    const msg = isCleared ? 'You may report to campus' : 'You are not cleared to visit campus'
+    const msg = isCleared ? 'You may report to campus' : 'You are not cleared to visit campus';
     const icon = isCleared ? 'success' : 'error';
     swal('Health check recorded', msg, icon)
-      .then((value) => {
+      .then(() => {
         // reloads page when swal is closed
-        this.setState({ redirectToReferer: true })
+        this.setState({ redirectToReferer: true });
       });
   }
 
@@ -41,107 +42,113 @@ class DailyCheckup extends React.Component {
       <div>
         <Container id="bg-image" className="d-flex" fluid>
           <Container className="mb-3">
-          <Clearance statuses={this.props.statuses}/>
-          <Row>
-            <Col>
-              <Card>
-                <Card.Body>
-                  <Card.Title className="font-weight-bold">Do any of the following apply to you?</Card.Title>
-                  <p>
+            <Clearance statuses={this.props.statuses}/>
+            <Row>
+              <Col>
+                <Card>
+                  <Card.Body>
+                    <Card.Title className="font-weight-bold">Do any of the following apply to you?</Card.Title>
+                    <p>
                     Have you tested positive for COVID-19 and are on home isolation?
-                  </p>
-                  <p>
+                    </p>
+                    <p>
                     Check for Symptoms of Illness:  If you have any symptoms of illness,
                     do not come to campus or the workplace.  Do you currently have any of
-                    the following symptoms that are <strong> new, worsening, and not attributable to a pre-existing condition?</strong>
-                  </p>
-                  <ul>
-                    <li>
+                    the following symptoms that are <strong> new, worsening, and not attributable
+                    to a pre-existing condition?</strong>
+                    </p>
+                    <ul>
+                      <li>
                       Fever greater than 100.4 °F or feeling feverish (chills, sweating)
-                    </li>
-                    <li>
+                      </li>
+                      <li>
                       Cough
-                    </li>
-                    <li>
+                      </li>
+                      <li>
                       Shortness of breath/difficulty breathing
-                    </li>
-                    <li>
+                      </li>
+                      <li>
                       Sore throat
-                    </li>
-                    <li>
+                      </li>
+                      <li>
                       Unexplained muscle/body aches
-                    </li>
-                    <li>
+                      </li>
+                      <li>
                       Nausea/vomiting or diarrhea
-                    </li>
-                    <li>
+                      </li>
+                      <li>
                       Loss of senses of taste or smell
-                    </li>
-                    <li>
+                      </li>
+                      <li>
                       Runny or congested nose
-                    </li>
-                    <li>
+                      </li>
+                      <li>
                       Headache
-                    </li>
-                    <li>
+                      </li>
+                      <li>
                       Skin rash
-                    </li>
-                    <li>
+                      </li>
+                      <li>
                       Chest pain or pressure
-                    </li>
-                  </ul>
-                  <p>
+                      </li>
+                    </ul>
+                    <p>
                     Check for Recent COVID-19 Exposure:
-                  </p>
-                  <ul>
-                    <li>
-                      Have you traveled out of the state and are currently under quarantine orders by the Department of Health or your medical care provider ?
-                    </li>
-                    <li>
-                      Are you unvaccinated and have been in close contact (&lt;6 feet for &ge; 15 minutes, cumulatively, over a 24-hour period) with anyone who
-                      has an active, diagnosed case of COVID-19?  Note: Healthcare students/personnel wearing appropriate PPE at ALL TIMES while caring for a patient with COVID-19 would NOT be considered a close contact (ref. DOH medical advisory #16)
-                    </li>
-                    <li>
-                      Has the Department of Health told you that you have been in contact with a person with COVID-19 AND you are UNvaccinated?
-                    </li>
-                  </ul>
-                  <Row>
-                    <Col>
-                        <Button 
+                    </p>
+                    <ul>
+                      <li>
+                      Have you traveled out of the state and are currently under quarantine orders by
+                      the Department of Health or your medical care provider ?
+                      </li>
+                      <li>
+                      Are you unvaccinated and have been in close contact (&lt;6 feet for &ge; 15 minutes,
+                      cumulatively, over a 24-hour period) with anyone who has an active, diagnosed case
+                      of COVID-19?  Note: Healthcare students/personnel wearing appropriate
+                      PPE at ALL TIMES while caring for a patient with COVID-19 would NOT be considered
+                      a close contact (ref. DOH medical advisory #16)
+                      </li>
+                      <li>
+                      Has the Department of Health told you that you have been in contact with a person
+                      with COVID-19 AND you are UNvaccinated?
+                      </li>
+                    </ul>
+                    <Row>
+                      <Col>
+                        <Button
                           variant='dark'
                           className='landing-btns'
-                          onClick={e => this.submit(false)}>
+                          onClick={ e => this.submit(e, false)}>
                           Yes
                         </Button>
-                    </Col>
-                    <Col>
-                        <Button 
+                      </Col>
+                      <Col>
+                        <Button
                           variant='dark'
                           className='landing-btns'
-                          onClick={e => this.submit(true)}>
+                          onClick={ e => this.submit(e, true)}>
                           No
                         </Button>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col className="text-center pt-2">
-                    <p>New submissions will update your status</p>
-                    </Col>
-                  </Row>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col className="text-center pt-2">
+                        <p>New submissions will update your status</p>
+                      </Col>
+                    </Row>
+                  </Card.Body>
+                </Card>
+              </Col>
+            </Row>
           </Container>
         </Container>
       </div>
-    );    
+    );
   }
 }
 
 DailyCheckup.propTypes = {
   ready: PropTypes.bool.isRequired,
-  statuses: PropTypes.array.isRequired
+  statuses: PropTypes.array.isRequired,
 };
 
 export default withTracker(() => {
@@ -150,7 +157,6 @@ export default withTracker(() => {
   const statuses = HealthStatus.collection.find({}).fetch();
   return {
     ready,
-    statuses
+    statuses,
   };
 })(DailyCheckup);
-
