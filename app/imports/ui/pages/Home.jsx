@@ -8,6 +8,7 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CheckInCards from '../components/CheckInCards';
 import { HealthStatus } from '../../api/healthstatus/HealthStatus';
+import Clearance from '../components/Clearance';
 
 /** A simple static component to render some text for the landing page. */
 class Home extends React.Component {
@@ -19,9 +20,10 @@ class Home extends React.Component {
     return (
       <Container fluid>
         <Container id="home">
-          <h1 style={{ color: 'white' }}>On-campus check-in</h1>
+          <Clearance statuses={this.props.health}/>
           <Row xs={1}>
             <Col>
+              <h1 style={{ color: 'white' }}>On-campus check-in</h1>
               <Card className="mb-5">
                 <Card.Body className="p-4">
                   <Card.Title style={{ fontSize: '25px' }}>Daily health check-in</Card.Title>
