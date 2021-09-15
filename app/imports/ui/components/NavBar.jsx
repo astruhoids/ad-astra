@@ -27,12 +27,12 @@ class NavBar extends React.Component {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link as={NavLink} activeClassName="active" exact to="/home" key='home'>Home</Nav.Link>,
+            <Nav.Link as={NavLink} activeClassName="active" exact to="/home" key='home'>Home</Nav.Link>
             <Nav.Link as={NavLink} activeClassName="active" exact to="/dailycheck" key='dailycheck'>
                 Daily Check
-            </Nav.Link>,
-            <Nav.Link as={NavLink} activeClassName="active" exact to="/history" key='history'>History</Nav.Link>,
-            <Nav.Link as={NavLink} activeClassName="active" exact to="/vaccine" key='Vaccine'>Vaccine</Nav.Link>]
+            </Nav.Link>
+            <Nav.Link as={NavLink} activeClassName="active" exact to="/history" key='history'>History</Nav.Link>
+            <Nav.Link as={NavLink} activeClassName="active" exact to="/vaccine" key='Vaccine'>Vaccine</Nav.Link>
             {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
               <Nav.Link as={NavLink} activeClassName="active" exact to="/admin" key="admin">Admin</Nav.Link>
             ) : ''}
