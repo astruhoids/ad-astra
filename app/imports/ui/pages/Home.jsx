@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import { Link } from 'react-router-dom';
-import { faHeart, faCheckCircle, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CheckInCards from '../components/CheckInCards';
 import { HealthStatus } from '../../api/healthstatus/HealthStatus';

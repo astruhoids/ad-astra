@@ -1,11 +1,10 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { HealthStatus } from '../../api/healthstatus/HealthStatus';
 import CheckInCards from '../components/CheckInCards';
-import Clearance from '../components/Clearance';
 
 /** Renders a table containing all of the Stuff documents. Use <CheckInCards> to render each card. */
 class History extends React.Component {
