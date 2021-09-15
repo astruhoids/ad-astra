@@ -1,13 +1,13 @@
 import React from 'react';
 import { Container, Col, Row, Form, Button, Figure } from 'react-bootstrap';
-import moment from 'moment';
 
 /** A simple static component to render some text for the landing page. */
 class AddVaccine extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { doses: 2 };
+    this.state = { doses: 2, imgSrc: '' };
     this.handleDosages = this.handleDosages.bind(this);
+    this.swapImage = this.swapImage.bind(this);
   }
 
   handleDosages(e) {
@@ -19,24 +19,17 @@ class AddVaccine extends React.Component {
     }
   }
 
+  swapImage(e) {
+    const image = e.target.files;
+    const reader = new global.FileReader();
+    reader.onload = r => {
+      this.setState({ imgSrc: r.target.result });
+    };
+
+    reader.readAsDataURL(image[0]);
+  }
+
   render() {
-    function swapImage(e) {
-      // eslint-disable-next-line no-undef
-      const frame = document.getElementById('frameImage');
-      const image = e.target.files;
-      const reader = new FileReader();
-      reader.onload = r => {
-        frame.src = r.target.result;
-      };
-
-      reader.readAsDataURL(image[0]);
-    }
-
-    function getToday() {
-      const today = moment();
-      return today.format('YYYY-MM-DD');
-    }
-
     return (
       <div>
         <Container id="bg-image" className="d-flex" fluid>
@@ -74,7 +67,7 @@ class AddVaccine extends React.Component {
                   </Col>
                   <Col>
                     <Form.Label>Date Received</Form.Label>
-                    <Form.Control required type='date' min='2020-12-01' max={getToday()}></Form.Control>
+                    <Form.Control required type='date' min='2020-12-01'></Form.Control>
                   </Col>
                   <Col>
                     <Form.Label>Healthcare Professional or Clinic Site</Form.Label>
@@ -92,7 +85,7 @@ class AddVaccine extends React.Component {
                     </Col>
                     <Col>
                       <Form.Label>Date Received</Form.Label>
-                      <Form.Control required type='date' min='2020-12-01' max={getToday()}></Form.Control>
+                      <Form.Control required type='date' min='2020-12-01'></Form.Control>
                     </Col>
                     <Col>
                       <Form.Label>Healthcare Professional or Clinic Site</Form.Label>
@@ -105,12 +98,13 @@ class AddVaccine extends React.Component {
               }
               <Form.Group controlId="formFile">
                 <Form.Label>Vaccination Record Card</Form.Label>
-                <Form.Control required type='file' accept='image/*' onChange={e => swapImage(e)} />
+                <Form.Control required type='file' accept='image/*' onChange={e => this.swapImage(e)} />
               </Form.Group>
               <Row className='justify-content-center'>
                 <Figure>
                   <Figure.Image
                     id='frameImage'
+                    src={this.state.imgSrc ? this.state.imgSrc : null }
                     width={800}
                     height={500}
                     thumbnail
