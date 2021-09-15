@@ -7,5 +7,10 @@
   "defaultData": [
     { "user": "john@foo.com", "cleared": true, "date": "2021-09-12T07:30" },
     { "user": "john@foo.com", "cleared": false, "date": "2021-09-10T07:30" }
+  ],
+
+  "defaultUserData" : [
+    { "user":  "john@foo.com", "cleared":  true, "campus":  "UH Manoa", "affiliation":  true, "housing":  true, "online":  false},
+    { "user":  "admin@foo.com", "cleared":  false, "campus":  "", "affiliation":  false, "housing":  false, "online":  false}
   ]
 }

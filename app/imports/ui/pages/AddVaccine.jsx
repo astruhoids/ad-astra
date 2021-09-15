@@ -46,7 +46,11 @@ class AddVaccine extends React.Component {
             <Form>
               <Form.Group>
                 <Form.Label>Product Name/Manufacturer</Form.Label>
-                <Form.Control required placeholder='Select' as='select' onChange={e => this.handleDosages(e.target.value)}>
+                <Form.Control
+                  required
+                  placeholder='Select'
+                  as='select'
+                  onChange={e => this.handleDosages(e.target.value)}>
                   <option value='Moderna'>Moderna</option>
                   <option value='Pfizer'>Pfizer</option>
                   <option value='Johnson'>Johnson &amp; Johnson</option>

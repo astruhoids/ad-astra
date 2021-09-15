@@ -10,16 +10,14 @@ class Clearance extends React.Component {
     const now = new Date();
     const dailyCheckDone = this.props.statuses.some((ele) => now.getDate() === ele.date.getDate() &&
       now.getMonth() === ele.date.getMonth() && now.getFullYear() === ele.date.getFullYear());
-    
+
     // if check was not done
     if (!dailyCheckDone) {
       this.state = { variant: 'warning' };
     } else {
       // get latest status
-      // sorts this.props.statuses by epoch 
-      this.props.statuses.sort((a, b) => {
-        return a.date.getTime() - b.date.getTime();
-      });
+      // sorts this.props.statuses by epoch
+      this.props.statuses.sort((a, b) => a.date.getTime() - b.date.getTime());
 
       this.state = { variant: this.props.statuses.pop().cleared ? 'success' : 'danger' };
     }

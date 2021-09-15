@@ -3,17 +3,14 @@ import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Container, Col, Row, Button, Image } from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom';
+import { Meteor } from 'meteor/meteor';
 
 /** A simple static component to render some text for the landing page. */
 class Landing extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     if (this.props.currentUser) {
-      return <Redirect to="/home"/>
+      return <Redirect to="/home"/>;
     }
 
     return (
@@ -29,7 +26,9 @@ class Landing extends React.Component {
             <Row>
               <Col>
                 <Link to='/login'><Button className="landing-btns" variant="primary" size="lg">Login</Button></Link>
-                <Link to='/signup'><Button className="landing-btns" variant="secondary" size="lg">New User?</Button></Link>
+                <Link to='/signup'>
+                  <Button className="landing-btns" variant="secondary" size="lg">New User?</Button>
+                </Link>
               </Col>
             </Row>
           </Container>
@@ -41,7 +40,7 @@ class Landing extends React.Component {
 
 Landing.propTypes = {
   currentUser: PropTypes.string,
-}
+};
 
 const LandingContainer = withTracker(() => ({
   currentUser: Meteor.user() ? Meteor.user().username : '',

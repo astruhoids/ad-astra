@@ -35,7 +35,7 @@ class App extends React.Component {
             <ProtectedRoute exact path="/vaccine" component={AddVaccine}/>
             <ProtectedRoute exact path="/userinfo" component={UserInformationPage}/>
             <Route component={NotFound}/>
-            {/*<AdminProtectedRoute path="/admin" component={ListStuffAdmin}/>*/}
+            {/* <AdminProtectedRoute path="/admin" component={ListStuffAdmin}/> */}
           </Switch>
           <Footer/>
         </div>

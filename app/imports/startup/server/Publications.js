@@ -3,7 +3,7 @@ import { Roles } from 'meteor/alanning:roles';
 import { HealthStatus } from '../../api/healthstatus/HealthStatus';
 import { UserInformation } from '../../api/userinformation/UserInformation';
 
-Meteor.publish(HealthStatus.userPublicationName, function() {
+Meteor.publish(HealthStatus.userPublicationName, function () {
   if (this.userId) {
     const username = Meteor.users.findOne(this.userId).username;
     return HealthStatus.collection.find({ user: username });
@@ -11,14 +11,14 @@ Meteor.publish(HealthStatus.userPublicationName, function() {
   return this.ready();
 });
 
-Meteor.publish(HealthStatus.adminPublicationName, function() {
+Meteor.publish(HealthStatus.adminPublicationName, function () {
   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
     return HealthStatus.collection.find();
   }
   return this.ready();
 });
 
-Meteor.publish(UserInformation.userPublicationName, function() {
+Meteor.publish(UserInformation.userPublicationName, function () {
   if (this.userId) {
     const username = Meteor.users.findOne(this.userId).username;
     return UserInformation.collection.find({ user: username });
@@ -26,7 +26,7 @@ Meteor.publish(UserInformation.userPublicationName, function() {
   return this.ready();
 });
 
-Meteor.publish(UserInformation.adminPublicationName, function() {
+Meteor.publish(UserInformation.adminPublicationName, function () {
   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
     return UserInformation.collection.find();
   }
