@@ -6,6 +6,7 @@ import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { AutoForm, SubmitField, TextField } from 'uniforms-bootstrap4';
 import { Container, Col, Row, Alert, Card } from 'react-bootstrap';
 import SimpleSchema from 'simpl-schema';
+import { UserInformation } from '../../api/userinformation/UserInformation';
 
 const bridge = new SimpleSchema2Bridge(new SimpleSchema({
   email: {
@@ -49,6 +50,7 @@ class Signup extends React.Component {
           this.setState({ error: '', redirectToReferer: true });
         }
       });
+      UserInformation.collection.insert({ user: email, campus: '', cleared: false, housing: false, affiliation: false, online: false })
     }
   }
 
