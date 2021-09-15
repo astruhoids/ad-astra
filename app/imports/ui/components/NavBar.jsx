@@ -17,7 +17,7 @@ class NavBar extends React.Component {
   }
 
   renderNavBar() {
-    const menuStyle = { margin: '10px' };
+    const menuStyle = { margin: '10px 0' };
     return (
       <Navbar style={menuStyle} bg='dark' variant="dark" expand="lg">
         <Navbar.Brand as={NavLink} activeClassName="" exact to={'/home'}>

@@ -12,9 +12,10 @@ import { HealthStatus } from '../../api/healthstatus/HealthStatus';
 /** A simple static component to render some text for the landing page. */
 class Home extends React.Component {
   render() {
-
-    const dailychecks = this.props.health.sort((a, b) => (a.date.getDate() < b.date.getDate() ? 1 : -1));
-
+    let dailychecks;
+    if(this.props.ready) {
+      dailychecks = this.props.health.sort((a, b) => (a.date.getDate() < b.date.getDate() ? 1 : -1));
+    }
     return (
       <Container fluid>
         <Container id="home">
@@ -25,16 +26,18 @@ class Home extends React.Component {
                 <Card.Body className="p-4">
                   <Card.Title style={{ fontSize: '25px' }}>Daily health check-in</Card.Title>
                   <Card.Subtitle className="mb-2 text-muted">Help keep our campus safe by completing your daily health check-in!</Card.Subtitle>
-                  <Card.Text className="my-3">
+                  <Card.Text as="div" className="my-3">
                     <ol>
                       <li>Check your symptoms.</li>
                       <li>Keep track of your symptoms every day.</li>
                     </ol>
                   </Card.Text>
-                  <Link to='/dailycheck'><Button variant="outline-info" size='lg'>
+                  <Link to='/dailycheck'>
+                    <Button variant="outline-info" size='lg'>
                     <FontAwesomeIcon icon={faHeart} className="mr-2"/>
-                  Check Your Symptoms
-                  </Button></Link>
+                    Check Your Symptoms
+                    </Button>
+                  </Link>
                 </Card.Body>
               </Card>
               <Card className="mb-5">
@@ -42,46 +45,47 @@ class Home extends React.Component {
                   <Card.Title className="mb-4" style={{ fontSize: '25px' }}>Vaccination Card Submission</Card.Title>
                   <ListGroup className="list-group-flush" id="home-vaccine-card">
                     <ListGroupItem>
-                      <Card.Subtitle text-muted>Vaccine Name</Card.Subtitle>
+                      <Card.Subtitle className="text-muted">Vaccine Name</Card.Subtitle>
                       <Card.Text>VACCINE NAME</Card.Text>
                     </ListGroupItem>
                     <ListGroupItem>
                       <Row xs={1} md={3}>
                         <Col>
-                          <Card.Subtitle text-muted>1st Dose: Manufacturer Lot Number</Card.Subtitle>
+                          <Card.Subtitle className="text-muted">1st Dose: Manufacturer Lot Number</Card.Subtitle>
                           <Card.Text>LOT NUMBER</Card.Text>
                         </Col>
                         <Col>
-                          <Card.Subtitle text-muted>1st Dose: Date</Card.Subtitle>
+                          <Card.Subtitle className="text-muted">1st Dose: Date</Card.Subtitle>
                           <Card.Text>DATE</Card.Text>
                         </Col>
                       </Row>
                     </ListGroupItem>
                     <ListGroupItem>
-                      <Card.Subtitle text-muted>1st Dose: Healthcare Professional or Clinic Site</Card.Subtitle>
+                      <Card.Subtitle className="text-muted">1st Dose: Healthcare Professional or Clinic Site</Card.Subtitle>
                       <Card.Text>LOCATION</Card.Text>
                     </ListGroupItem>
                     <ListGroupItem>
                       <Row xs={1} md={3}>
                         <Col>
-                          <Card.Subtitle text-muted>2nd Dose: Manufacturer Lot Number</Card.Subtitle>
+                          <Card.Subtitle className="text-muted">2nd Dose: Manufacturer Lot Number</Card.Subtitle>
                           <Card.Text>LOT NUMBER</Card.Text>
                         </Col>
                         <Col>
-                          <Card.Subtitle text-muted>2nd Dose: Date</Card.Subtitle>
+                          <Card.Subtitle className="text-muted">2nd Dose: Date</Card.Subtitle>
                           <Card.Text>DATE</Card.Text>
                         </Col>
                       </Row>
                     </ListGroupItem>
                     <ListGroupItem>
-                      <Card.Subtitle text-muted>2nd Dose: Healthcare Professional or Clinic Site</Card.Subtitle>
+                      <Card.Subtitle className="text-muted">2nd Dose: Healthcare Professional or Clinic Site</Card.Subtitle>
                       <Card.Text>LOCATION</Card.Text>
                     </ListGroupItem>
                   </ListGroup>
                 </Card.Body>
               </Card>
               <h1 style={{ color: 'white' }} className="mb-4">Check-in History</h1>
-              {dailychecks.map((health) => <CheckInCards key={health._id} health={health}/>)}
+              {(this.props.ready && dailychecks) ? dailychecks.map((health) => 
+                <CheckInCards key={health._id} health={health}/>) : <></>}
             </Col>
           </Row>
         </Container>

@@ -24,14 +24,14 @@ class DailyCheckup extends React.Component {
     swal('Health check recorded', msg, icon)
       .then((value) => {
         // reloads page when swal is closed
-        window.location.reload(false);
+        this.setState({ redirectToReferer: true })
       });
   }
 
   render() {
     // if user responds to daily checkin, redirect login screen
     if (this.state.redirectToReferer) {
-      return <Redirect to={{ pathname: '/' }}/>;
+      return <Redirect to={{ pathname: '/home' }}/>;
     }
     return (this.props.ready) ? this.renderPage() : '';
   }
@@ -47,66 +47,64 @@ class DailyCheckup extends React.Component {
               <Card>
                 <Card.Body>
                   <Card.Title className="font-weight-bold">Do any of the following apply to you?</Card.Title>
-                  <Card.Text>
-                    <p>
-                      Have you tested positive for COVID-19 and are on home isolation?
-                    </p>
-                    <p>
-                      Check for Symptoms of Illness:  If you have any symptoms of illness,
-                      do not come to campus or the workplace.  Do you currently have any of
-                      the following symptoms that are <strong> new, worsening, and not attributable to a pre-existing condition?</strong>
-                    </p>
-                    <ul>
-                      <li>
-                        Fever greater than 100.4 °F or feeling feverish (chills, sweating)
-                      </li>
-                      <li>
-                        Cough
-                      </li>
-                      <li>
-                        Shortness of breath/difficulty breathing
-                      </li>
-                      <li>
-                        Sore throat
-                      </li>
-                      <li>
-                        Unexplained muscle/body aches
-                      </li>
-                      <li>
-                        Nausea/vomiting or diarrhea
-                      </li>
-                      <li>
-                        Loss of senses of taste or smell
-                      </li>
-                      <li>
-                        Runny or congested nose
-                      </li>
-                      <li>
-                        Headache
-                      </li>
-                      <li>
-                        Skin rash
-                      </li>
-                      <li>
-                        Chest pain or pressure
-                      </li>
-                    </ul>
-                    <p>
-                      Check for Recent COVID-19 Exposure:
-                    </p>
-                    <ul>
-                      <li>
-                        Have you traveled out of the state and are currently under quarantine orders by the Department of Health or your medical care provider ?
-                      </li>
-                      <li>
-                        Are you unvaccinated and have been in close contact (&lt;6 feet for &ge; 15 minutes, cumulatively, over a 24-hour period) with anyone who
-                        has an active, diagnosed case of COVID-19?  Note: Healthcare students/personnel wearing appropriate PPE at ALL TIMES while caring for a patient with COVID-19 would NOT be considered a close contact (ref. DOH medical advisory #16)
-                      </li>
-                      <li>
-                        Has the Department of Health told you that you have been in contact with a person with COVID-19 AND you are UNvaccinated?
-                      </li>
-                    </ul>
-                  </Card.Text>
+                  <p>
+                    Have you tested positive for COVID-19 and are on home isolation?
+                  </p>
+                  <p>
+                    Check for Symptoms of Illness:  If you have any symptoms of illness,
+                    do not come to campus or the workplace.  Do you currently have any of
+                    the following symptoms that are <strong> new, worsening, and not attributable to a pre-existing condition?</strong>
+                  </p>
+                  <ul>
+                    <li>
+                      Fever greater than 100.4 °F or feeling feverish (chills, sweating)
+                    </li>
+                    <li>
+                      Cough
+                    </li>
+                    <li>
+                      Shortness of breath/difficulty breathing
+                    </li>
+                    <li>
+                      Sore throat
+                    </li>
+                    <li>
+                      Unexplained muscle/body aches
+                    </li>
+                    <li>
+                      Nausea/vomiting or diarrhea
+                    </li>
+                    <li>
+                      Loss of senses of taste or smell
+                    </li>
+                    <li>
+                      Runny or congested nose
+                    </li>
+                    <li>
+                      Headache
+                    </li>
+                    <li>
+                      Skin rash
+                    </li>
+                    <li>
+                      Chest pain or pressure
+                    </li>
+                  </ul>
+                  <p>
+                    Check for Recent COVID-19 Exposure:
+                  </p>
+                  <ul>
+                    <li>
+                      Have you traveled out of the state and are currently under quarantine orders by the Department of Health or your medical care provider ?
+                    </li>
+                    <li>
+                      Are you unvaccinated and have been in close contact (&lt;6 feet for &ge; 15 minutes, cumulatively, over a 24-hour period) with anyone who
+                      has an active, diagnosed case of COVID-19?  Note: Healthcare students/personnel wearing appropriate PPE at ALL TIMES while caring for a patient with COVID-19 would NOT be considered a close contact (ref. DOH medical advisory #16)
+                    </li>
+                    <li>
+                      Has the Department of Health told you that you have been in contact with a person with COVID-19 AND you are UNvaccinated?
+                    </li>
+                  </ul>
                   <Row>
                     <Col>
                         <Button 

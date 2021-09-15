@@ -6,7 +6,7 @@ class Footer extends React.Component {
     const divStyle = { paddingTop: '15px' };
     return (
       <footer>
-        <Container fluid style={divStyle} className="text-center">
+        <Container fluid style={divStyle} className="text-center text-white">
           <hr />
           AstrUHoids <br />
           University of Hawaii <br />

@@ -1,10 +1,21 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { withTracker } from 'meteor/react-meteor-data';
 import { Container, Col, Row, Button, Image } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 /** A simple static component to render some text for the landing page. */
 class Landing extends React.Component {
+
+  constructor(props) {
+    super(props);
+  }
+
   render() {
+    if (this.props.currentUser) {
+      return <Redirect to="/home"/>
+    }
+
     return (
       <div>
         <Container id="bg-image" className="d-flex" fluid>
@@ -28,4 +39,12 @@ class Landing extends React.Component {
   }
 }
 
-export default Landing;
+Landing.propTypes = {
+  currentUser: PropTypes.string,
+}
+
+const LandingContainer = withTracker(() => ({
+  currentUser: Meteor.user() ? Meteor.user().username : '',
+}))(Landing);
+
+export default LandingContainer;

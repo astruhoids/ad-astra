@@ -16,9 +16,7 @@ class CheckInCards extends React.Component {
           <Card.Body>
             <Card.Text>
               {this.formatDate(this.props.health.date)}&emsp;
-              <Card.Link href='/'>
-                <Link to={`/edit/${this.props.health._id}`} ><small className="text-muted">View Details &gt;</small></Link>
-              </Card.Link>
+              <Link to={`/edit/${this.props.health._id}`} ><small className="text-muted">View Details &gt;</small></Link>
             </Card.Text>
             {this.props.health.cleared ? (
               <Card.Title>
