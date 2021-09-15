@@ -1,24 +1,4 @@
-#landing-page {
-    background-color: whitesmoke !important;
-    border-radius: 15px;
-    max-width: fit-content;
-    min-height: auto;
-    padding-top: 2.5rem;
-    padding-bottom: 2.5rem;
-    padding-left: 2.5rem;
-    padding-right: 2.5rem;
-}
-
-/*#bg-image {*/
-/*    background: url('images/amongus-background.png');*/
-/*    min-height: 720px;*/
-/*    max-width: 100%;*/
-/*    margin-top: -0.7rem;*/
-/*    background-position: center;*/
-/*    background-repeat: no-repeat;*/
-/*    background-size: cover;*/
-/*}*/
-
+/* App Background Image */
 .app-bg-image {
     background: url('images/amongus-background.png');
     min-height: 720px;
@@ -29,19 +9,41 @@
     background-size: cover;
 }
 
+/* Landing Page */
+#landing-page {
+    background-color: whitesmoke !important;
+    border-radius: 15px;
+    max-width: fit-content;
+    min-height: auto;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    margin-top: 10rem;
+}
+
 .landing-btns {
     margin-top: 2rem;
     width: 100%;
 }
 
-#clearance {
-    position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
+/* Home Page */
+#home-page {
+    border-radius: 15px;
+    margin-bottom: 5rem;
 }
 
+.list-group-item {
+    border: none !important;
+}
+
+/* History Page */
+#history-page {
+    padding: 2.5rem;
+    margin-top: 1.5rem;
+}
+
+/* Daily Check Page */
 #daily-check {
     background-color: whitesmoke !important;
     border-radius: 15px;
@@ -55,16 +57,17 @@
     border-bottom-right-radius: 0px !important;
 }
 
-#history {
-    padding: 2.5rem;
-    margin-top: 1.5rem;
+/* Sign-in Page */
+#signin-page {
+    margin-top: 10rem;
 }
 
-#home {
-    border-radius: 15px;
-    margin-bottom: 5rem;
+/* Sign-up Page */
+#signup-page {
+    margin-top: 10rem;
 }
 
-.list-group-item {
-    border: none !important;
+/* User Information Page */
+#userinfo-page {
+    margin-top: 4rem;
 }

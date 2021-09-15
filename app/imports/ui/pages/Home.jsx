@@ -19,7 +19,7 @@ class Home extends React.Component {
     }
     return (
       <Container fluid>
-        <Container id="home">
+        <Container id="home-page">
           <Clearance statuses={this.props.health}/>
           <Row xs={1}>
             <Col>

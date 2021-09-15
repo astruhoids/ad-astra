@@ -15,7 +15,7 @@ class Landing extends React.Component {
 
     return (
       <div>
-        <Container id="bg-image" className="d-flex" fluid>
+        <Container className="d-flex" fluid>
           <Container id='landing-page' className="text-center justify-content-center align-self-center">
             <Row>
               <Col>

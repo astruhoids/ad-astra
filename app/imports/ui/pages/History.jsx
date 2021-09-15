@@ -21,7 +21,7 @@ class History extends React.Component {
 
     return (
       <Container className="d-flex" fluid>
-        <Container id="history">
+        <Container id="history-page">
           <h1 style={{ color: 'white' }} className="mb-4">Check-in History</h1>
           {dailychecks.map((health) => <CheckInCards key={health._id} health={health}/>)}
         </Container>
