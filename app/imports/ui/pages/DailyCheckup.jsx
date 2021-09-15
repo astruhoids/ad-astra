@@ -117,7 +117,7 @@ class DailyCheckup extends React.Component {
                         <Button
                           variant='dark'
                           className='landing-btns'
-                          onClick={ e => this.submit(e, false)}>
+                          onClick={ () => this.submit(false)}>
                           Yes
                         </Button>
                       </Col>
@@ -125,7 +125,7 @@ class DailyCheckup extends React.Component {
                         <Button
                           variant='dark'
                           className='landing-btns'
-                          onClick={ e => this.submit(e, true)}>
+                          onClick={ () => this.submit(true)}>
                           No
                         </Button>
                       </Col>
