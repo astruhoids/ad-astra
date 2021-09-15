@@ -9,7 +9,17 @@
     padding-right: 2.5rem;
 }
 
-#bg-image {
+/*#bg-image {*/
+/*    background: url('images/amongus-background.png');*/
+/*    min-height: 720px;*/
+/*    max-width: 100%;*/
+/*    margin-top: -0.7rem;*/
+/*    background-position: center;*/
+/*    background-repeat: no-repeat;*/
+/*    background-size: cover;*/
+/*}*/
+
+.app-bg-image {
     background: url('images/amongus-background.png');
     min-height: 720px;
     max-width: 100%;
@@ -46,8 +56,17 @@
 }
 
 #history {
+    padding: 2.5rem;
+    margin-top: 1.5rem;
+}
+
+#home {
     border-radius: 15px;
     padding: 2.5rem;
-    margin-top: 5rem;
+    margin-top: 2.5rem;
     margin-bottom: 5rem;
+}
+
+.list-group-item {
+    border: none !important;
 }
