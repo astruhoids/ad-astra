@@ -4,7 +4,7 @@ import { Button, Container, Row, Col, Card } from 'react-bootstrap';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import swal from 'sweetalert';
-import Meteor from 'metoer/meteor';
+import { Meteor } from 'meteor/meteor';
 import Clearance from '../components/Clearance';
 import { HealthStatus } from '../../api/healthstatus/HealthStatus';
 
