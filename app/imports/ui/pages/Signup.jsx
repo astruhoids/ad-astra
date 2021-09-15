@@ -11,13 +11,13 @@ import { UserInformation } from '../../api/userinformation/UserInformation';
 const bridge = new SimpleSchema2Bridge(new SimpleSchema({
   email: {
     type: String,
-    required: true
+    required: true,
   },
   password: {
     type: String,
     required: true,
-    uniforms: { type: 'password' }
-  }
+    uniforms: { type: 'password' },
+  },
 }));
 
 /**
@@ -36,12 +36,12 @@ class Signup extends React.Component {
   }
 
   /* Handle Signup submission. Create user account and a profile entry, then redirect to the home page. */
-  submit = (data, fRef) => {
+  submit = (data) => {
     const { password, email } = data;
 
     // Check that inputted email is a valid email
     if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
-      this.setState({ error: 'Invalid email format'});
+      this.setState({ error: 'Invalid email format' });
     } else {
       Accounts.createUser({ email, username: email, password }, (err) => {
         if (err) {
@@ -50,7 +50,8 @@ class Signup extends React.Component {
           this.setState({ error: '', redirectToReferer: true });
         }
       });
-      UserInformation.collection.insert({ user: email, campus: '', cleared: false, housing: false, affiliation: false, online: false })
+      UserInformation.collection.insert({
+        user: email, campus: '', cleared: false, housing: false, affiliation: false, online: false });
     }
   }
 
@@ -70,7 +71,7 @@ class Signup extends React.Component {
               <Card>
                 <Card.Header className="text-center">Account Registration</Card.Header>
                 <Card.Body>
-                  <AutoForm ref={ref => {fRef = ref}} schema={bridge} onSubmit={data => this.submit(data, fRef)}>
+                  <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)}>
                     <TextField type="email" name="email" placeholder="user@example.com"/>
                     <TextField type="password" name="password" placeholder="SuperSecretPassword"/>
                     <SubmitField inputClassName="btn btn-secondary pl-3 pr-3" value="Create Account"/>

@@ -10,13 +10,13 @@ import SimpleSchema from 'simpl-schema';
 const bridge = new SimpleSchema2Bridge(new SimpleSchema({
   email: {
     type: String,
-    required: true
+    required: true,
   },
   password: {
     type: String,
     required: true,
-    uniforms: { type: 'password' }
-  }
+    uniforms: { type: 'password' },
+  },
 }));
 
 /**
@@ -32,9 +32,9 @@ export default class Signin extends React.Component {
   }
 
   // Handle Signin submission using Meteor's account mechanism.
-  submit = (data, fRef) => {
+  submit = (data) => {
     const { password, email } = data;
-    
+
     Meteor.loginWithPassword(email, password, (err) => {
       if (err) {
         this.setState({ error: err.reason });
@@ -61,7 +61,7 @@ export default class Signin extends React.Component {
               <Card>
                 <Card.Header className="text-center">Account Login</Card.Header>
                 <Card.Body>
-                  <AutoForm ref={ref => {fRef = ref}} schema={bridge} onSubmit={data => this.submit(data, fRef)}>
+                  <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)}>
                     <TextField type="email" name="email" placeholder="user@example.com"/>
                     <TextField type="password" name="password" placeholder="SuperSecretPassword"/>
                     <SubmitField inputClassName="btn btn-secondary pl-3 pr-3" value="Login"/>

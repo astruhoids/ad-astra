@@ -91,34 +91,54 @@ class UserInformationPage extends React.Component {
                 <Card.Body>
                   <Form onSubmit={this.submit}>
                     <Form.Group>
-                      <Form.Check.Label htmlFor="campus"><span className="h5">Please select your Campus or Organization affiliation.</span> <br /> <span>You may edit your selection at any time in your user settings.</span></Form.Check.Label>
-                      <Form.Control as="select" value={this.state.campus} onChange={(e) => this.setState({ campus: e.target.value })}>
+                      <Form.Check.Label htmlFor="campus">
+                        <span className="h5">Please select your Campus or Organization affiliation.</span>
+                        <br />
+                        <span>You may edit your selection at any time in your user settings.</span>
+                      </Form.Check.Label>
+                      <Form.Control as="select" value={this.state.campus}
+                        onChange={(e) => this.setState({ campus: e.target.value })}>
                         <option value="">Select a campus...</option>
                         {campuses.map((campus, index) => <option key={index} value={campus}>{campus}</option>)}
                       </Form.Control>
                     </Form.Group>
                     <Form.Group>
-                      <Form.Check.Label htmlFor="affiliation"><span className="h5">Are you a current UH/RCUH student or employee?</span> <br /> <span>You will not receive any further email notifications if you are no longer affiliated with UH</span></Form.Check.Label>
+                      <Form.Check.Label htmlFor="affiliation">
+                        <span className="h5">Are you a current UH/RCUH student or employee?</span>
+                        <br />
+                        <span>You will not receive any further email
+                          notifications if you are no longer affiliated with UH</span>
+                      </Form.Check.Label>
                       <Form.Check.Input name="affiliation" type="checkbox" hidden value={this.state.affiliation} />
                       <br />
-                      <Button variant={this.state.affiliation ? this.yesVariant : this.noVariant} block onClick={(e) => this.setState({ affiliation: true })}>Yes</Button>
-                      <Button variant={this.state.affiliation ? this.noVariant : this.yesVariant} block onClick={(e) => this.setState({ affiliation: false })}>No</Button>
+                      <Button variant={this.state.affiliation ? this.yesVariant : this.noVariant}
+                        block onClick={() => this.setState({ affiliation: true })}>Yes</Button>
+                      <Button variant={this.state.affiliation ? this.noVariant : this.yesVariant}
+                        block onClick={() => this.setState({ affiliation: false })}>No</Button>
                     </Form.Group>
 
                     <Form.Group>
-                      <Form.Check.Label htmlFor="housing"><span className="h5">Are you an On-Campus Housing Resident?</span></Form.Check.Label>
+                      <Form.Check.Label htmlFor="housing">
+                        <span className="h5">Are you an On-Campus Housing Resident?</span>
+                      </Form.Check.Label>
                       <Form.Check.Input name="housing" type="checkbox" hidden value={this.state.housing} />
                       <br />
-                      <Button variant={this.state.housing ? this.yesVariant : this.noVariant} block onClick={(e) => this.setState({ housing: true })}>Yes</Button>
-                      <Button variant={this.state.housing ? this.noVariant : this.yesVariant} block onClick={(e) => this.setState({ housing: false })}>No</Button>
+                      <Button variant={this.state.housing ? this.yesVariant : this.noVariant}
+                        block onClick={() => this.setState({ housing: true })}>Yes</Button>
+                      <Button variant={this.state.housing ? this.noVariant : this.yesVariant}
+                        block onClick={() => this.setState({ housing: false })}>No</Button>
                     </Form.Group>
 
                     <Form.Group>
-                      <Form.Check.Label htmlFor="online"><span className="h5">Are you studying / working online only?</span></Form.Check.Label>
+                      <Form.Check.Label htmlFor="online">
+                        <span className="h5">Are you studying / working online only?</span>
+                      </Form.Check.Label>
                       <Form.Check.Input name="online" type="checkbox" hidden value={this.state.online} />
                       <br />
-                      <Button variant={this.state.online ? this.yesVariant : this.noVariant} block onClick={(e) => this.setState({ online: true })}>Yes</Button>
-                      <Button variant={this.state.online ? this.noVariant : this.yesVariant} block onClick={(e) => this.setState({ online: false })}>No</Button>
+                      <Button variant={this.state.online ? this.yesVariant : this.noVariant}
+                        block onClick={() => this.setState({ online: true })}>Yes</Button>
+                      <Button variant={this.state.online ? this.noVariant : this.yesVariant}
+                        block onClick={() => this.setState({ online: false })}>No</Button>
                     </Form.Group>
 
                     <Button type="submit" className="mt-4" variant="success" block>Save</Button>

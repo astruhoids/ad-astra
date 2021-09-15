@@ -16,17 +16,20 @@ class CheckInCards extends React.Component {
           <Card.Body>
             <Card.Text>
               {this.formatDate(this.props.health.date)}&emsp;
-              <Link to={`/edit/${this.props.health._id}`} ><small className="text-muted">View Details &gt;</small></Link>
+              <Link to={`/edit/${this.props.health._id}`} >
+                <small className="text-muted">View Details &gt;</small>
+              </Link>
             </Card.Text>
             {this.props.health.cleared ? (
               <Card.Title>
                 <FontAwesomeIcon icon={faCheck} className="mr-2" color='green'/>
-              You may report to campus / Anyone in Quarantine MUST continue to adhere to location restrictions
+                You may report to campus / Anyone in Quarantine MUST continue to adhere to location restrictions
               </Card.Title>
             ) : (
               <Card.Title>
                 <FontAwesomeIcon icon={faTimes} className="mr-2" color='red'/>
-                      Stay home or in your campus residence. DO NOT report to campus. DO NOT attend UH in-person events or activities.
+                Stay home or in your campus residence. DO NOT report to campus.
+                DO NOT attend UH in-person events or activities.
               </Card.Title>
             )}
           </Card.Body>

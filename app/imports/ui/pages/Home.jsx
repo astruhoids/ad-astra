@@ -14,7 +14,7 @@ import Clearance from '../components/Clearance';
 class Home extends React.Component {
   render() {
     let dailychecks;
-    if(this.props.ready) {
+    if (this.props.ready) {
       dailychecks = this.props.health.sort((a, b) => (a.date.getDate() < b.date.getDate() ? 1 : -1));
     }
     return (
@@ -27,7 +27,9 @@ class Home extends React.Component {
               <Card className="mb-5">
                 <Card.Body className="p-4">
                   <Card.Title style={{ fontSize: '25px' }}>Daily health check-in</Card.Title>
-                  <Card.Subtitle className="mb-2 text-muted">Help keep our campus safe by completing your daily health check-in!</Card.Subtitle>
+                  <Card.Subtitle className="mb-2 text-muted">
+                    Help keep our campus safe by completing your daily health check-in!
+                  </Card.Subtitle>
                   <Card.Text as="div" className="my-3">
                     <ol>
                       <li>Check your symptoms.</li>
@@ -36,7 +38,7 @@ class Home extends React.Component {
                   </Card.Text>
                   <Link to='/dailycheck'>
                     <Button variant="outline-info" size='lg'>
-                    <FontAwesomeIcon icon={faHeart} className="mr-2"/>
+                      <FontAwesomeIcon icon={faHeart} className="mr-2"/>
                     Check Your Symptoms
                     </Button>
                   </Link>
@@ -63,7 +65,9 @@ class Home extends React.Component {
                       </Row>
                     </ListGroupItem>
                     <ListGroupItem>
-                      <Card.Subtitle className="text-muted">1st Dose: Healthcare Professional or Clinic Site</Card.Subtitle>
+                      <Card.Subtitle className="text-muted">
+                        1st Dose: Healthcare Professional or Clinic Site
+                      </Card.Subtitle>
                       <Card.Text>LOCATION</Card.Text>
                     </ListGroupItem>
                     <ListGroupItem>
@@ -79,15 +83,17 @@ class Home extends React.Component {
                       </Row>
                     </ListGroupItem>
                     <ListGroupItem>
-                      <Card.Subtitle className="text-muted">2nd Dose: Healthcare Professional or Clinic Site</Card.Subtitle>
+                      <Card.Subtitle className="text-muted">
+                        2nd Dose: Healthcare Professional or Clinic Site
+                      </Card.Subtitle>
                       <Card.Text>LOCATION</Card.Text>
                     </ListGroupItem>
                   </ListGroup>
                 </Card.Body>
               </Card>
               <h1 style={{ color: 'white' }} className="mb-4">Check-in History</h1>
-              {(this.props.ready && dailychecks) ? dailychecks.map((health) => 
-                <CheckInCards key={health._id} health={health}/>) : <></>}
+              {(this.props.ready && dailychecks) ? (
+                dailychecks.map((health) => <CheckInCards key={health._id} health={health}/>)) : <></>}
             </Col>
           </Row>
         </Container>

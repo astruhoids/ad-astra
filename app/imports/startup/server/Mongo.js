@@ -1,9 +1,6 @@
 import { Meteor } from 'meteor/meteor';
-import { Stuffs } from '../../api/stuff/Stuff.js';
-import { HealthStatus } from '../../api/healthstatus/HealthStatus.js'
+import { HealthStatus } from '../../api/healthstatus/HealthStatus.js';
 import { UserInformation } from '../../api/userinformation/UserInformation.js';
-
-/* eslint-disable no-console */
 
 function addCheckIn(data) {
   console.log(`\tRecording health check-in at ${data.date} for ${data.user}`);
@@ -19,5 +16,12 @@ if (HealthStatus.collection.find().count() === 0) {
   if (Meteor.settings.defaultData) {
     console.log('Creating default data.');
     Meteor.settings.defaultData.map(data => addCheckIn(data));
+  }
+}
+
+if (UserInformation.collection.find().count() === 0) {
+  if (Meteor.settings.defaultUserData) {
+    console.log('Creating default user data.');
+    Meteor.settings.defaultUserData.map(data => addUserInfo(data));
   }
 }
