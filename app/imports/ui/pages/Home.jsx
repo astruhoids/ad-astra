@@ -15,7 +15,7 @@ class Home extends React.Component {
   render() {
     let dailychecks;
     if (this.props.ready) {
-      dailychecks = this.props.health.sort((a, b) => (a.date.getDate() < b.date.getDate() ? 1 : -1));
+      dailychecks = this.props.health.sort((a, b) => (a.date.getDate() < b.date.getDate() ? 1 : -1)).slice(0, 4);
     }
     return (
       <Container fluid>
@@ -91,7 +91,12 @@ class Home extends React.Component {
                   </ListGroup>
                 </Card.Body>
               </Card>
-              <h1 style={{ color: 'white' }} className="mb-4">Check-in History</h1>
+              <h1 style={{ color: 'white' }} className="mb-4">
+                Check-in History&nbsp;
+                <Link to='/history'>
+                  <h6 style={{ color: 'white' }}>View All &gt;</h6>
+                </Link>
+              </h1>
               {(this.props.ready && dailychecks) ? (
                 dailychecks.map((health) => <CheckInCards key={health._id} health={health}/>)) : <></>}
             </Col>
