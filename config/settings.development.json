@@ -12,5 +12,9 @@
   "defaultUserData" : [
     { "user":  "john@foo.com", "cleared":  true, "campus":  "UH Manoa", "affiliation":  true, "housing":  true, "online":  false},
     { "user":  "admin@foo.com", "cleared":  false, "campus":  "", "affiliation":  false, "housing":  false, "online":  false}
+  ],
+
+  "defaultVaccineData" : [
+    { "user": "john@foo.com", "vaccine" : "Moderna", "firstLot": "EN6203", "firstDate": "2021-09-01", "firstLocation": "Walgreens", "secondLot" : "EN6208", "secondDate": "2021-09-22", "secondLocation": "Walgreens", "card": false }
   ]
 }

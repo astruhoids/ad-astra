@@ -6,7 +6,7 @@ import swal from 'sweetalert';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { VaccineInformation } from '../../api/vaccineinformation/VaccineInformation';
+import { VaccineInformation } from '../../api/vaccineInformation/VaccineInformation';
 
 /** A simple static component to render some text for the landing page. */
 class AddVaccine extends React.Component {
@@ -234,7 +234,8 @@ class AddVaccine extends React.Component {
                         required={this.state.require}
                         type='text'
                         maxLength={8}
-                        placeholder="1A2B3CD4"></Form.Control>
+                        placeholder="1A2B3CD4"
+                      />
                     </Col>
                     <Col>
                       <Form.Label>Date Received</Form.Label>
