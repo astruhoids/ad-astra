@@ -71,3 +71,11 @@
 #userinfo-page {
     margin-top: 4rem;
 }
+
+.spinning {
+    animation: 0.9s linear infinite spinner-border;
+}
+
+.text-border {
+    text-shadow: 0 0 2px #000;
+}

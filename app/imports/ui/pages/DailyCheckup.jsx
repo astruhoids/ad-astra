@@ -7,6 +7,7 @@ import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import Clearance from '../components/Clearance';
 import { HealthStatus } from '../../api/healthstatus/HealthStatus';
+import Loader from '../components/Loader';
 
 /** A simple static component to render some text for the landing page. */
 class DailyCheckup extends React.Component {
@@ -34,7 +35,11 @@ class DailyCheckup extends React.Component {
     if (this.state.redirectToReferer) {
       return <Redirect to={{ pathname: '/home' }}/>;
     }
-    return (this.props.ready) ? this.renderPage() : '';
+    return (this.props.ready) ? this.renderPage() : (
+      <Container>
+        <Loader text='Getting data'/>
+      </Container>
+    );
   }
 
   renderPage() {

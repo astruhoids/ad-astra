@@ -24,7 +24,7 @@ class Home extends React.Component {
     return (
       <Container fluid>
         <Container id="home-page">
-          <Clearance statuses={this.props.health}/>
+          {(this.props.ready) ? (<Clearance statuses={this.props.health}/>) : <></>}
           <Row className="justify-content-md-center">
             <Col>
               <h1 style={{ color: 'white' }}>On-campus check-in</h1>
