@@ -6,6 +6,7 @@ import swal from 'sweetalert';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import { UserInformation } from '../../api/userinformation/UserInformation';
+import Loader from '../components/Loader';
 
 class UserInformationPage extends React.Component {
 
@@ -60,7 +61,11 @@ class UserInformationPage extends React.Component {
 
   render() {
     // If the subscription(s) have been received, render the page, otherwise show a loading icon.
-    return (this.props.ready) ? this.renderPage() : <Spinner animation='border'>Getting data</Spinner>;
+    return (this.props.ready) ? this.renderPage() : (
+      <Container>
+        <Loader text='Getting data'/>
+      </Container>
+    );
   }
 
   renderPage() {
