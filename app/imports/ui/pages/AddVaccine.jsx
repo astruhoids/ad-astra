@@ -204,7 +204,7 @@ class AddVaccine extends React.Component {
                     <Form.Control
                       name='firstDate'
                       value={this.state.firstDate ?
-                        moment(this.state.firstDate).format('YYYY-MM-DD') : moment().format('YYYY-MM-DD')}
+                        moment(this.state.firstDate).format('YYYY-MM-DD') : ''}
                       required
                       type='date'
                       min='2020-12-01'
@@ -241,7 +241,7 @@ class AddVaccine extends React.Component {
                       <Form.Control
                         name='secondDate'
                         value={this.state.secondDate ?
-                          moment(this.state.secondDate).format('YYYY-MM-DD') : moment().format('YYYY-MM-DD')}
+                          moment(this.state.secondDate).format('YYYY-MM-DD') : ''}
                         required={this.state.require}
                         type='date'
                         min='2020-12-01'
