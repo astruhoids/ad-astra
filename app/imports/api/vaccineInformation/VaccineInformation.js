@@ -4,10 +4,11 @@ import { Tracker } from 'meteor/tracker';
 
 class VaccineInformationCollection {
   constructor() {
-    this.name = 'VaccineInformation';
+    this.name = 'VaccineInformationCollection';
     this.collection = new Mongo.Collection(this.name);
 
     this.schema = new SimpleSchema({
+      user: String,
       vaccine: {
         required: true,
         type: String,
@@ -46,19 +47,19 @@ class VaccineInformationCollection {
       },
       secondLot: {
         type: String,
-        label: 'LOT Number',
+        label: 'LOT Number 2',
         optional: true,
       },
       secondDate: {
         type: Date,
         min: new Date(2019, 11, 1),
         max: new Date(),
-        label: 'Date',
+        label: 'Date 2',
         optional: true,
       },
       secondLocation: {
         type: String,
-        label: 'Healthcare Professional or Clinic Site',
+        label: 'Healthcare Professional or Clinic Site 2',
         optional: true,
       },
       card: {
