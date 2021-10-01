@@ -15,6 +15,7 @@ class AddVaccine extends React.Component {
     this.state = {
       doses: 2,
       loaded: false,
+      imgFile: '',
       require: true,
       vaccine: '',
       firstLot: '',
@@ -29,20 +30,33 @@ class AddVaccine extends React.Component {
     this.swapImage = this.swapImage.bind(this);
     this.submit = this.submit.bind(this);
     this.updateForm = this.updateForm.bind(this);
+    this.insertCollection = this.insertCollection.bind(this);
+    this.updateCollection = this.updateCollection.bind(this);
   }
 
-  // some function pass in obj, whatever insert
-  // check
-  // this.propsvaccinfo exist, if update, else insert
+  insertCollection() {
+    VaccineInformation.collection.insert({
+      user: this.props.currentUser,
+      vaccine: this.state.vaccine,
+      firstLot: this.state.firstLot,
+      firstDate: this.state.firstDate,
+      firstLocation: this.state.firstLocation,
+      secondLot: this.state.secondLot,
+      secondDate: this.state.secondDate,
+      secondLocation: this.state.secondLocation,
+      // card: this.state.card,
+    }, (error) => {
+      if (error) {
+        swal('Error', error.message, 'error');
+      } else {
+        swal('Success', 'Vaccine Information Saved', 'success');
+      }
+    });
+  }
 
-  submit(form) {
-    console.log(form);
-    form.preventDefault();
-
-    console.log(this.state.doses);
-
-    if (this.state.doses === 2) {
-      VaccineInformation.collection.insert({
+  updateCollection() {
+    VaccineInformation.collection.update(this.props.vaccInfo._id, {
+      $set: {
         user: this.props.currentUser,
         vaccine: this.state.vaccine,
         firstLot: this.state.firstLot,
@@ -51,29 +65,26 @@ class AddVaccine extends React.Component {
         secondLot: this.state.secondLot,
         secondDate: this.state.secondDate,
         secondLocation: this.state.secondLocation,
-        card: this.state.card,
-      }, (error) => {
-        if (error) {
-          swal('Error', error.message, 'error');
-        } else {
-          swal('Success', 'Vaccine Information Saved', 'success');
-        }
-      });
-    } else if (this.state.doses === 1) {
-      VaccineInformation.collection.insert({
-        user: this.props.currentUser,
-        vaccine: this.state.vaccine,
-        firstLot: this.state.firstLot,
-        firstDate: this.state.firstDate,
-        firstLocation: this.state.firstLocation,
-        card: this.state.card,
-      }, (error) => {
-        if (error) {
-          swal('Error', error.message, 'error');
-        } else {
-          swal('Success', 'Vaccine Information Saved', 'success');
-        }
-      });
+        // card: this.state.card,
+      },
+    }, (error) => {
+      if (error) {
+        swal('Error', error.message, 'error');
+      } else {
+        swal('Success', 'Vaccine Information Saved', 'success');
+      }
+    });
+  }
+
+  submit(form) {
+    form.preventDefault();
+
+    const mode = this.props.vaccInfo === undefined;
+
+    if (mode) {
+      this.insertCollection();
+    } else {
+      this.updateCollection();
     }
   }
 
@@ -82,24 +93,29 @@ class AddVaccine extends React.Component {
       || e === 'Gamelya' || e === 'Vector' || e === 'IMBCAMS' || e === 'Novavax') {
       this.setState({ doses: 2, require: true });
     } else {
-      this.setState({ doses: 1, require: false });
+      this.setState({ doses: 1, require: false, secondLot: '', secondDate: '', secondLocation: '' });
     }
   }
 
   swapImage(e) {
+    // console.log(e);
     const image = e.target.files;
+    // console.log(image);
     const reader = new global.FileReader();
     reader.onload = r => {
-      this.setState({ imgSrc: r.target.result });
+      // console.log(r.target.result);
+      this.setState({ imgFile: r.target.result });
     };
 
     reader.readAsDataURL(image[0]);
   }
 
+  // Update state variable of modified field
   updateForm(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  // Load user's vaccine information if they have
   loadVaccInfo() {
     if (!this.state.loaded && this.props.vaccInfo) {
       const {
@@ -123,9 +139,9 @@ class AddVaccine extends React.Component {
         // card,
         loaded: true,
       });
-      this.handleDosages(this.state.vaccine);
-    }
 
+      this.handleDosages(vaccine);
+    }
   }
 
   componentDidUpdate() {
@@ -150,7 +166,7 @@ class AddVaccine extends React.Component {
                 <Form.Label>Product Name/Manufacturer</Form.Label>
                 <Form.Control
                   required
-                  name = 'vaccine'
+                  name='vaccine'
                   placeholder='Select'
                   as='select'
                   value={this.state.vaccine}
@@ -179,8 +195,8 @@ class AddVaccine extends React.Component {
                       value={this.state.firstLot}
                       required
                       type='text'
-                      maxLength={7}
-                      placeholder="1234567"
+                      maxLength={8}
+                      placeholder="5W6X7Y8Z"
                     />
                   </Col>
                   <Col>
@@ -212,8 +228,13 @@ class AddVaccine extends React.Component {
                   <Form.Row>
                     <Col>
                       <Form.Label>LOT Number</Form.Label>
-                      <Form.Control name='secondLot' required={this.state.require}
-                        type='text' maxLength={7} placeholder="1234567"></Form.Control>
+                      <Form.Control
+                        name='secondLot'
+                        value={this.state.secondLot}
+                        required={this.state.require}
+                        type='text'
+                        maxLength={8}
+                        placeholder="1A2B3CD4"></Form.Control>
                     </Col>
                     <Col>
                       <Form.Label>Date Received</Form.Label>
@@ -255,7 +276,7 @@ class AddVaccine extends React.Component {
                 <Figure>
                   <Figure.Image
                     id='frameImage'
-                    src={this.state.imgSrc ? this.state.imgSrc : null }
+                    src={this.state.imgFile ? this.state.imgFile : null}
                     width={800}
                     height={500}
                     thumbnail
