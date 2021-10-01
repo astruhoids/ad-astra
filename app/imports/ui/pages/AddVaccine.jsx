@@ -6,7 +6,7 @@ import swal from 'sweetalert';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { VaccineInformation } from '../../api/vaccineinformation/VaccineInformation';
+import { VaccineInformation } from '../../api/vaccineInformation/VaccineInformation';
 
 /** A simple static component to render some text for the landing page. */
 class AddVaccine extends React.Component {

@@ -9,6 +9,10 @@ class VaccineInformationCollection {
 
     this.schema = new SimpleSchema({
       user: String,
+      submitted: {
+        type: Boolean,
+        defaultValue: false,
+      },
       vaccine: {
         required: true,
         type: String,
