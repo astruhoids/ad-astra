@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import { HealthStatus } from '../../api/healthstatus/HealthStatus';
 import CheckInCards from '../components/CheckInCards';
 
-/** Renders a table containing all of the Stuff documents. Use <CheckInCards> to render each card. */
 class History extends React.Component {
 
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.

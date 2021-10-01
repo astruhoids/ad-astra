@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
 class VaccineInfoCard extends React.Component {
-  formatDate = (date) => date.toLocaleDateString()
+  formatDate = (date) => date.toLocaleDateString('en-US')
+
+  singleDose = ['Johnson', 'AstraZeneca', 'CanSinoBio', 'ZhifeiLongcom'];
 
   render() {
     return (
@@ -35,24 +37,28 @@ class VaccineInfoCard extends React.Component {
                 </Card.Subtitle>
                 <Card.Text>{this.props.vaccine.firstLocation}</Card.Text>
               </ListGroupItem>
-              <ListGroupItem>
-                <Row xs={1} md={3}>
-                  <Col>
-                    <Card.Subtitle className="text-muted">2nd Dose: Manufacturer Lot Number</Card.Subtitle>
-                    <Card.Text>{this.props.vaccine.secondLot}</Card.Text>
-                  </Col>
-                  <Col>
-                    <Card.Subtitle className="text-muted">2nd Dose: Date</Card.Subtitle>
-                    <Card.Text>{this.formatDate(this.props.vaccine.secondDate)}</Card.Text>
-                  </Col>
-                </Row>
-              </ListGroupItem>
-              <ListGroupItem>
-                <Card.Subtitle className="text-muted">
-                  2nd Dose: Healthcare Professional or Clinic Site
-                </Card.Subtitle>
-                <Card.Text>{this.props.vaccine.secondLocation}</Card.Text>
-              </ListGroupItem>
+              {this.singleDose.includes(this.props.vaccine.vaccine) ? '' : (
+                <div>
+                  <ListGroupItem>
+                    <Row xs={1} md={3}>
+                      <Col>
+                        <Card.Subtitle className="text-muted">2nd Dose: Manufacturer Lot Number</Card.Subtitle>
+                        <Card.Text>{this.props.vaccine.secondLot}</Card.Text>
+                      </Col>
+                      <Col>
+                        <Card.Subtitle className="text-muted">2nd Dose: Date</Card.Subtitle>
+                        <Card.Text>{this.formatDate(this.props.vaccine.secondDate)}</Card.Text>
+                      </Col>
+                    </Row>
+                  </ListGroupItem>
+                  <ListGroupItem>
+                    <Card.Subtitle className="text-muted">
+                      2nd Dose: Healthcare Professional or Clinic Site
+                    </Card.Subtitle>
+                    <Card.Text>{this.props.vaccine.secondLocation}</Card.Text>
+                  </ListGroupItem>
+                </div>
+              )}
             </ListGroup>
           </Card.Body>
         </Card>
@@ -64,7 +70,6 @@ class VaccineInfoCard extends React.Component {
 // Require a document to be passed to this component.
 VaccineInfoCard.propTypes = {
   vaccine: PropTypes.shape({
-    submitted: PropTypes.bool,
     vaccine: PropTypes.string,
     firstDate: PropTypes.instanceOf(Date),
     firstLocation: PropTypes.string,

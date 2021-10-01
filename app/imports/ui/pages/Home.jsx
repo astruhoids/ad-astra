@@ -21,8 +21,6 @@ class Home extends React.Component {
       dailychecks = this.props.health.sort((a, b) => (a.date.getDate() < b.date.getDate() ? 1 : -1)).slice(0, 4);
     }
 
-    const hasVaccinationCard = this.props.vaccine.submitted;
-
     return (
       <Container fluid>
         <Container id="home-page">
@@ -50,13 +48,13 @@ class Home extends React.Component {
                   </Link>
                 </Card.Body>
               </Card>
-              {hasVaccinationCard ? (
+              {(this.props.ready && this.props.vaccine.length !== 0) ? (
                 this.props.vaccine.map((vaccine) => <VaccineInfoCard key={vaccine._id} vaccine={vaccine}/>)
               ) : (
                 <NoVaccination />
               )}
               <h1 style={{ color: 'white' }} className="mb-4">
-                Check-in History&nbsp;
+                Check-in History
                 <Link to='/history'>
                   <h6 style={{ color: 'white' }}>View All &gt;</h6>
                 </Link>
@@ -76,6 +74,7 @@ class Home extends React.Component {
 Home.propTypes = {
   health: PropTypes.array.isRequired,
   vaccine: PropTypes.array.isRequired,
+  currentUser: PropTypes.string,
   ready: PropTypes.bool.isRequired,
 };
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
@@ -85,10 +84,12 @@ export default withTracker(() => {
   const subscription2 = Meteor.subscribe(VaccineInformation.userPublicationName);
   // Determine if the subscription is ready
   const ready = subscription1.ready() && subscription2.ready();
+  const currentUser = Meteor.user() ? Meteor.user().username : '';
   // Get the Health documents
   const health = HealthStatus.collection.find({}).fetch();
   const vaccine = VaccineInformation.collection.find({}).fetch();
   return {
+    currentUser,
     health,
     vaccine,
     ready,

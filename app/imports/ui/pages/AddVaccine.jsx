@@ -234,7 +234,8 @@ class AddVaccine extends React.Component {
                         required={this.state.require}
                         type='text'
                         maxLength={8}
-                        placeholder="1A2B3CD4"></Form.Control>
+                        placeholder="1A2B3CD4"
+                      />
                     </Col>
                     <Col>
                       <Form.Label>Date Received</Form.Label>

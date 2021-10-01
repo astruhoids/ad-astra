@@ -15,6 +15,6 @@
   ],
 
   "defaultVaccineData" : [
-    { "user": "john@foo.com", "submitted": "true", "vaccine" : "Moderna", "firstLot": "EN6203", "firstDate": "2021-09-01", "firstLocation": "Walgreens", "secondLot" : "EN6208", "secondDate": "2021-09-22", "secondLocation": "Walgreens", "card": false }
+    { "user": "john@foo.com", "vaccine" : "Moderna", "firstLot": "EN6203", "firstDate": "2021-09-01", "firstLocation": "Walgreens", "secondLot" : "EN6208", "secondDate": "2021-09-22", "secondLocation": "Walgreens", "card": false }
   ]
 }
