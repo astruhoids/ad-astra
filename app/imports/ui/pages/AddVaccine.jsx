@@ -1,21 +1,31 @@
 import React from 'react';
-import { Container, Col, Row, Form, Button, Figure } from 'react-bootstrap';
+import { Container, Form, Col, Figure, Row, Button } from 'react-bootstrap';
+import { withTracker } from 'meteor/react-meteor-data';
+import { Meteor } from 'meteor/meteor';
+import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { VaccineInformation } from '../../api/vaccineInformation/VaccineInformation';
 
 /** A simple static component to render some text for the landing page. */
 class AddVaccine extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { doses: 2, imgSrc: '' };
+    this.state = { doses: 2, imgSrc: '', opt: false };
     this.handleDosages = this.handleDosages.bind(this);
     this.swapImage = this.swapImage.bind(this);
   }
 
+  submit(form) {
+    form.preventDefault();
+    console.log(form.target);
+  }
+
   handleDosages(e) {
     if (e === 'Moderna' || e === 'Pfizer' || e === 'Sinopharm' || e === 'Sinovac'
-        || e === 'Gamelya' || e === 'Vector' || e === 'IMBCAMS' || e === 'Novavax') {
-      this.setState({ doses: 2 });
+      || e === 'Gamelya' || e === 'Vector' || e === 'IMBCAMS' || e === 'Novavax') {
+      this.setState({ doses: 2, opt: false });
     } else {
-      this.setState({ doses: 1 });
+      this.setState({ doses: 1, opt: true });
     }
   }
 
@@ -36,7 +46,7 @@ class AddVaccine extends React.Component {
           <Container id='daily-check' className="justify-content-left align-self-center">
             <h2>Vaccination Card</h2>
             <hr />
-            <Form>
+            <Form onSubmit={(e) => this.submit(e)}>
               <Form.Group>
                 <Form.Label>Product Name/Manufacturer</Form.Label>
                 <Form.Control
@@ -120,4 +130,22 @@ class AddVaccine extends React.Component {
   }
 }
 
-export default AddVaccine;
+AddVaccine.propTypes = {
+  ready: PropTypes.bool,
+  vaccInfo: PropTypes.object,
+  currentUser: PropTypes.string,
+};
+
+const VaccinationCollection = withTracker(() => {
+  const subscription = Meteor.subscribe(VaccineInformation.userPublicationName);
+  const ready = subscription.ready();
+  const currentUser = Meteor.user() ? Meteor.user().username : '';
+  const vaccInfo = VaccineInformation.collection.findOne({ user: currentUser });
+  return {
+    ready,
+    currentUser,
+    vaccInfo,
+  };
+})(AddVaccine);
+
+export default withRouter(VaccinationCollection);
