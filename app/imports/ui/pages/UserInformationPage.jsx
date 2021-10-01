@@ -46,8 +46,7 @@ class UserInformationPage extends React.Component {
   loadUserInfo() {
     if (!this.state.loaded) {
       if (this.props.ready) {
-        const userInfo = UserInformation.collection.findOne({ user: this.props.currentUser });
-        const { campus, housing, affiliation, online } = userInfo;
+        const { campus, housing, affiliation, online } = this.props.userInfo;
         this.setState({ campus, housing, affiliation, online, loaded: true });
       }
     }
