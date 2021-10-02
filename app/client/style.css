@@ -95,3 +95,8 @@ a.text-center.nav-link {
 .std-mt {
     margin-top: 2.5rem !important;
 }
+
+.vertical-nav {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
