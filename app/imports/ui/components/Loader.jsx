@@ -12,7 +12,7 @@ class Loader extends React.Component {
       <Row className="pt-4">
         <Col md={{ span: 4, offset: 4 }}>
           <Image className='spinning mx-auto d-block' src='/images/yellowpng.png' width='200' height='200'/>
-          <p class='text-white text-center h2 text-border'>{this.props.text}</p>
+          <p className='text-white text-center h2 text-border'>{this.props.text}</p>
         </Col>
       </Row>
     );

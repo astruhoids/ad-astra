@@ -12,6 +12,7 @@ import Clearance from '../components/Clearance';
 import { VaccineInformation } from '../../api/vaccineInformation/VaccineInformation';
 import VaccineInfoCard from '../components/VaccineInfoCard';
 import NoVaccination from '../components/NoVaccination';
+import VerticalNavBar from '../components/VerticalNavBar';
 
 /** A simple static component to render some text for the landing page. */
 class Home extends React.Component {
@@ -24,11 +25,12 @@ class Home extends React.Component {
     return (
       <Container fluid>
         <Container id="home-page">
-          {(this.props.ready) ? (<Clearance statuses={this.props.health}/>) : <></>}
           <Row className="justify-content-md-center">
+            <VerticalNavBar classes="std-mt mr-4 pl-1 pr-1"/>
             <Col>
-              <h1 style={{ color: 'white' }}>On-campus check-in</h1>
-              <Card className="mb-5">
+              {(this.props.ready) ? (<Clearance statuses={this.props.health}/>) : <></>}
+              <h1 className="text-border" style={{ color: 'white' }}>On-campus check-in</h1>
+              <Card border="dark" className="mb-5">
                 <Card.Body className="p-4">
                   <Card.Title style={{ fontSize: '25px' }}>Daily health check-in</Card.Title>
                   <Card.Subtitle className="mb-2 text-muted">
@@ -53,10 +55,10 @@ class Home extends React.Component {
               ) : (
                 <NoVaccination />
               )}
-              <h1 style={{ color: 'white' }} className="mb-4">
+              <h1 style={{ color: 'white' }} className="mb-4 text-border">
                 Check-in History
                 <Link to='/history'>
-                  <h6 style={{ color: 'white' }}>View All &gt;</h6>
+                  <h6 className="text-border" style={{ color: 'white' }}>View All &gt;</h6>
                 </Link>
               </h1>
               {(this.props.ready && dailychecks) ? (

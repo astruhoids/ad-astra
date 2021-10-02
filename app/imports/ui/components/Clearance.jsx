@@ -46,7 +46,7 @@ class Clearance extends React.Component {
       msg = (<p>You have not completed today&apos;s safety check</p>);
     }
     return (
-      <Row className="pt-3">
+      <Row className="std-mt">
         <Col>
           <Alert variant={this.state.variant}>
             <Alert.Heading>Status - {status}</Alert.Heading>

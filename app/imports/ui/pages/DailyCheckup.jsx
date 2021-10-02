@@ -8,6 +8,7 @@ import { Meteor } from 'meteor/meteor';
 import Clearance from '../components/Clearance';
 import { HealthStatus } from '../../api/healthstatus/HealthStatus';
 import Loader from '../components/Loader';
+import VerticalNavBar from '../components/VerticalNavBar';
 
 /** A simple static component to render some text for the landing page. */
 class DailyCheckup extends React.Component {
@@ -47,9 +48,10 @@ class DailyCheckup extends React.Component {
       <div>
         <Container id="bg-image" className="d-flex" fluid>
           <Container className="mb-3">
-            <Clearance statuses={this.props.statuses}/>
             <Row>
-              <Col>
+              <VerticalNavBar classes="std-mt mr-4 pl-1 pr-1"/>
+              <Col id="daily-checkup">
+                <Clearance statuses={this.props.statuses}/>
                 <Card>
                   <Card.Body>
                     <Card.Title className="font-weight-bold">Do any of the following apply to you?</Card.Title>

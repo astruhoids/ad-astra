@@ -39,17 +39,18 @@
 
 /* History Page */
 #history-page {
-    padding: 2.5rem;
-    margin-top: 1.5rem;
+    margin-top: 2.5rem;
 }
 
-/* Daily Check Page */
-#daily-check {
+/* Vaccination form */
+#vaccination-form {
     background-color: whitesmoke !important;
     border-radius: 15px;
     padding: 2.5rem;
-    margin-top: 5rem;
+    margin-top: 2.5rem;
     margin-bottom: 5rem;
+    border-color: #000;
+    border-width: 2px;
 }
 
 .no-right-radius {
@@ -69,7 +70,7 @@
 
 /* User Information Page */
 #userinfo-page {
-    margin-top: 4rem;
+    margin-top: 2.5rem;
 }
 
 .spinning {
@@ -77,5 +78,25 @@
 }
 
 .text-border {
-    text-shadow: 0 0 2px #000;
+    text-shadow: 0 0 4px #000;
+}
+
+.nav-pills .nav-link.active {
+    color: #007BFF !important;
+    background-color: transparent !important;
+}
+
+a.text-center.nav-link {
+    color: #A3A3A3 !important;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.std-mt {
+    margin-top: 2.5rem !important;
+}
+
+.vertical-nav {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }
