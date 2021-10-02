@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Form, Col, Figure, Row, Button, Card } from 'react-bootstrap';
+import { Container, Form, Col, Figure, Row, Button } from 'react-bootstrap';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import swal from 'sweetalert';

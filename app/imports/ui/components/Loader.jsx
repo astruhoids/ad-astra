@@ -1,12 +1,9 @@
 import React from 'react';
-import { Image } from 'react-bootstrap';
+import { Image, Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import { Row, Col } from 'react-bootstrap';
 
 class Loader extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+
   render() {
     return (
       <Row className="pt-4">

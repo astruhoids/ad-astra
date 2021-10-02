@@ -5,7 +5,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { withRouter, NavLink } from 'react-router-dom';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faUserMinus, faUsersCog } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faUserMinus } from '@fortawesome/free-solid-svg-icons';
 import { Roles } from 'meteor/alanning:roles';
 
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */

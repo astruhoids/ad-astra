@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Container, Row, Col, Card, Form, Button, Spinner } from 'react-bootstrap';
+import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import swal from 'sweetalert';
 import { withTracker } from 'meteor/react-meteor-data';
@@ -8,10 +8,11 @@ import { Meteor } from 'meteor/meteor';
 import { UserInformation } from '../../api/userinformation/UserInformation';
 import Loader from '../components/Loader';
 import VerticalNavBar from '../components/VerticalNavBar';
+
 class UserInformationPage extends React.Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.yesVariant = 'warning';
     this.noVariant = 'outline-warning';
     this.state = {
@@ -89,7 +90,7 @@ class UserInformationPage extends React.Component {
       <Container id="bg-image" className="d-flex" fluid>
         <Container id="userinfo-page">
           <Row md>
-            <VerticalNavBar classes="pl-1 pr-1"/>
+            <VerticalNavBar classes="pl-1 pr-1 mr-4"/>
             <Col>
               <Card border="dark">
                 <Card.Header className="h2">User Information</Card.Header>

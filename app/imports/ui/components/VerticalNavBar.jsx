@@ -6,9 +6,6 @@ import { faUsersCog, faHome, faHeart, faShieldVirus, faCheck } from '@fortawesom
 import PropTypes from 'prop-types';
 
 class VerticalNavBar extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     return (
@@ -60,7 +57,7 @@ class VerticalNavBar extends React.Component {
 }
 
 VerticalNavBar.propTypes = {
-  classes: PropTypes.string.isRequired
+  classes: PropTypes.string.isRequired,
 };
 
 // Enable ReactRouter for this component. https://reacttraining.com/react-router/web/api/withRouter
