@@ -14,7 +14,7 @@ class CheckInCards extends React.Component {
   render() {
     return (
       <div>
-        <Card className="mt-1">
+        <Card border="dark" className="mt-3">
           <Card.Body>
             <Card.Text>
               {this.formatDate(this.props.health.date)}&emsp;

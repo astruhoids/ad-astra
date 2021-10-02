@@ -7,7 +7,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import { UserInformation } from '../../api/userinformation/UserInformation';
 import Loader from '../components/Loader';
-
+import VerticalNavBar from '../components/VerticalNavBar';
 class UserInformationPage extends React.Component {
 
   constructor() {
@@ -89,9 +89,10 @@ class UserInformationPage extends React.Component {
       <Container id="bg-image" className="d-flex" fluid>
         <Container id="userinfo-page">
           <Row md>
-            <Col md={{ span: 8, offset: 2 }}>
-              <Card>
-                <Card.Header className="text-center h2">User Information</Card.Header>
+            <VerticalNavBar classes="pl-1 pr-1"/>
+            <Col>
+              <Card border="dark">
+                <Card.Header className="h2">User Information</Card.Header>
                 <Card.Body>
                   <Form onSubmit={this.submit}>
                     <Form.Group>

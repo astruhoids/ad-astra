@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Form, Col, Figure, Row, Button } from 'react-bootstrap';
+import { Container, Form, Col, Figure, Row, Button, Card } from 'react-bootstrap';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import swal from 'sweetalert';
@@ -7,6 +7,7 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { VaccineInformation } from '../../api/vaccineInformation/VaccineInformation';
+import VerticalNavBar from '../components/VerticalNavBar';
 
 /** A simple static component to render some text for the landing page. */
 class AddVaccine extends React.Component {
@@ -158,134 +159,140 @@ class AddVaccine extends React.Component {
     return (
       <div>
         <Container id="bg-image" className="d-flex" fluid>
-          <Container id='daily-check' className="justify-content-left align-self-center">
-            <h2>Vaccination Card</h2>
-            <hr />
-            <Form onSubmit={this.submit} onChange={this.updateForm}>
-              <Form.Group>
-                <Form.Label>Product Name/Manufacturer</Form.Label>
-                <Form.Control
-                  required
-                  name='vaccine'
-                  placeholder='Select'
-                  as='select'
-                  value={this.state.vaccine}
-                  onChange={e => this.handleDosages(e.target.value)}>
-                  <option value='Moderna'>Moderna</option>
-                  <option value='Pfizer'>Pfizer</option>
-                  <option value='Johnson'>Johnson &amp; Johnson</option>
-                  <option value='AstraZeneca'>AstraZeneca - AZD1222</option>
-                  <option value='Sinopharm'>Sinopharm BIBP-SARS-CoV-2</option>
-                  <option value='Sinovac'>Sinovac - SARS-CoV-2</option>
-                  <option value='Gamelya'>Gamelya Spuntnik V</option>
-                  <option value='CanSinoBio'>CanSinoBio</option>
-                  <option value='Vector'>Vector - EpiVacCorona</option>
-                  <option value='ZhifeiLongcom'>Zhifei Longcom - Recombinant Novel</option>
-                  <option value='IMBCAMS'>IMBCAMS - SARS-CoV-2</option>
-                  <option value='Novavax'>Novavax</option>
-                </Form.Control>
-              </Form.Group>
-              <Form.Group>
-                <h6>First Dose</h6>
-                <Form.Row>
-                  <Col>
-                    <Form.Label>LOT Number</Form.Label>
+          <Container className="justify-content-left align-self-center">
+            <Row>
+              <VerticalNavBar classes="std-mt mr-4 pl-1 pr-1"/>
+              <Col id="vaccination-form">
+                <h2>Vaccination Card</h2>
+                <hr />
+
+                <Form onSubmit={this.submit} onChange={this.updateForm}>
+                  <Form.Group>
+                    <Form.Label>Product Name/Manufacturer</Form.Label>
                     <Form.Control
-                      name='firstLot'
-                      value={this.state.firstLot}
                       required
-                      type='text'
-                      maxLength={8}
-                      placeholder="5W6X7Y8Z"
-                    />
-                  </Col>
-                  <Col>
-                    <Form.Label>Date Received</Form.Label>
+                      name='vaccine'
+                      placeholder='Select'
+                      as='select'
+                      value={this.state.vaccine}
+                      onChange={e => this.handleDosages(e.target.value)}>
+                      <option value='Moderna'>Moderna</option>
+                      <option value='Pfizer'>Pfizer</option>
+                      <option value='Johnson'>Johnson &amp; Johnson</option>
+                      <option value='AstraZeneca'>AstraZeneca - AZD1222</option>
+                      <option value='Sinopharm'>Sinopharm BIBP-SARS-CoV-2</option>
+                      <option value='Sinovac'>Sinovac - SARS-CoV-2</option>
+                      <option value='Gamelya'>Gamelya Spuntnik V</option>
+                      <option value='CanSinoBio'>CanSinoBio</option>
+                      <option value='Vector'>Vector - EpiVacCorona</option>
+                      <option value='ZhifeiLongcom'>Zhifei Longcom - Recombinant Novel</option>
+                      <option value='IMBCAMS'>IMBCAMS - SARS-CoV-2</option>
+                      <option value='Novavax'>Novavax</option>
+                    </Form.Control>
+                  </Form.Group>
+                  <Form.Group>
+                    <h6>First Dose</h6>
+                    <Form.Row>
+                      <Col>
+                        <Form.Label>LOT Number</Form.Label>
+                        <Form.Control
+                          name='firstLot'
+                          value={this.state.firstLot}
+                          required
+                          type='text'
+                          maxLength={8}
+                          placeholder="5W6X7Y8Z"
+                        />
+                      </Col>
+                      <Col>
+                        <Form.Label>Date Received</Form.Label>
+                        <Form.Control
+                          name='firstDate'
+                          value={this.state.firstDate ?
+                            moment(this.state.firstDate).format('YYYY-MM-DD') : ''}
+                          required
+                          type='date'
+                          min='2020-12-01'
+                        />
+                      </Col>
+                      <Col>
+                        <Form.Label>Healthcare Professional or Clinic Site</Form.Label>
+                        <Form.Control
+                          name='firstLocation'
+                          value={this.state.firstLocation}
+                          required
+                          type='text'
+                          maxLength={250}
+                        />
+                      </Col>
+                    </Form.Row>
+                  </Form.Group>
+                  {this.state.doses === 2 ?
+                    <Form.Group>
+                      <h6>Second Dose</h6>
+                      <Form.Row>
+                        <Col>
+                          <Form.Label>LOT Number</Form.Label>
+                          <Form.Control
+                            name='secondLot'
+                            value={this.state.secondLot}
+                            required={this.state.require}
+                            type='text'
+                            maxLength={8}
+                            placeholder="1A2B3CD4"
+                          />
+                        </Col>
+                        <Col>
+                          <Form.Label>Date Received</Form.Label>
+                          <Form.Control
+                            name='secondDate'
+                            value={this.state.secondDate ?
+                              moment(this.state.secondDate).format('YYYY-MM-DD') : ''}
+                            required={this.state.require}
+                            type='date'
+                            min='2020-12-01'
+                          />
+                        </Col>
+                        <Col>
+                          <Form.Label>Healthcare Professional or Clinic Site</Form.Label>
+                          <Form.Control
+                            name='secondLocation'
+                            value={this.state.secondLocation}
+                            required={this.state.require}
+                            type='text'
+                            maxLength={250}
+                          />
+                        </Col>
+                      </Form.Row>
+                    </Form.Group>
+                    :
+                    ''
+                  }
+                  <Form.Group controlId="formFile">
+                    <Form.Label>Vaccination Record Card</Form.Label>
                     <Form.Control
-                      name='firstDate'
-                      value={this.state.firstDate ?
-                        moment(this.state.firstDate).format('YYYY-MM-DD') : ''}
-                      required
-                      type='date'
-                      min='2020-12-01'
+                      name='card'
+                      // value={this.state.card}
+                      type='file'
+                      accept='image/*'
+                      onChange={e => this.swapImage(e)}
                     />
-                  </Col>
-                  <Col>
-                    <Form.Label>Healthcare Professional or Clinic Site</Form.Label>
-                    <Form.Control
-                      name='firstLocation'
-                      value={this.state.firstLocation}
-                      required
-                      type='text'
-                      maxLength={250}
-                    />
-                  </Col>
-                </Form.Row>
-              </Form.Group>
-              {this.state.doses === 2 ?
-                <Form.Group>
-                  <h6>Second Dose</h6>
-                  <Form.Row>
-                    <Col>
-                      <Form.Label>LOT Number</Form.Label>
-                      <Form.Control
-                        name='secondLot'
-                        value={this.state.secondLot}
-                        required={this.state.require}
-                        type='text'
-                        maxLength={8}
-                        placeholder="1A2B3CD4"
+                  </Form.Group>
+                  <Row className='justify-content-center'>
+                    <Figure>
+                      <Figure.Image
+                        id='frameImage'
+                        src={this.state.imgFile ? this.state.imgFile : null}
+                        width={800}
+                        height={500}
+                        thumbnail
                       />
-                    </Col>
-                    <Col>
-                      <Form.Label>Date Received</Form.Label>
-                      <Form.Control
-                        name='secondDate'
-                        value={this.state.secondDate ?
-                          moment(this.state.secondDate).format('YYYY-MM-DD') : ''}
-                        required={this.state.require}
-                        type='date'
-                        min='2020-12-01'
-                      />
-                    </Col>
-                    <Col>
-                      <Form.Label>Healthcare Professional or Clinic Site</Form.Label>
-                      <Form.Control
-                        name='secondLocation'
-                        value={this.state.secondLocation}
-                        required={this.state.require}
-                        type='text'
-                        maxLength={250}
-                      />
-                    </Col>
-                  </Form.Row>
-                </Form.Group>
-                :
-                ''
-              }
-              <Form.Group controlId="formFile">
-                <Form.Label>Vaccination Record Card</Form.Label>
-                <Form.Control
-                  name='card'
-                  // value={this.state.card}
-                  type='file'
-                  accept='image/*'
-                  onChange={e => this.swapImage(e)}
-                />
-              </Form.Group>
-              <Row className='justify-content-center'>
-                <Figure>
-                  <Figure.Image
-                    id='frameImage'
-                    src={this.state.imgFile ? this.state.imgFile : null}
-                    width={800}
-                    height={500}
-                    thumbnail
-                  />
-                </Figure>
-              </Row>
-              <Button type="submit">Submit form</Button>
-            </Form>
+                    </Figure>
+                  </Row>
+                  <Button type="submit">Submit form</Button>
+                </Form>
+              </Col>
+            </Row>
           </Container>
         </Container>
       </div>

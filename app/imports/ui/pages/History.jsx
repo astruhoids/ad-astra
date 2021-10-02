@@ -1,10 +1,11 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { HealthStatus } from '../../api/healthstatus/HealthStatus';
 import CheckInCards from '../components/CheckInCards';
+import VerticalNavBar from '../components/VerticalNavBar';
 
 class History extends React.Component {
 
@@ -19,10 +20,15 @@ class History extends React.Component {
     const dailychecks = this.props.health.sort((a, b) => (a.date.getDate() < b.date.getDate() ? 1 : -1));
 
     return (
-      <Container className="d-flex" fluid>
+      <Container id="bg-image" className="d-flex" fluid>
         <Container id="history-page">
-          <h1 style={{ color: 'white' }} className="mb-4">Check-in History</h1>
-          {dailychecks.map((health) => <CheckInCards key={health._id} health={health}/>)}
+          <Row>
+            <VerticalNavBar classes="mr-4 pl-1 pr-1" styling={{}}/>
+            <Col>
+              <h1 style={{ color: 'white' }} className="mb-4 text-border">Check-in History</h1>
+              {dailychecks.map((health) => <CheckInCards key={health._id} health={health}/>)}
+            </Col>
+          </Row>
         </Container>
       </Container>
     );
