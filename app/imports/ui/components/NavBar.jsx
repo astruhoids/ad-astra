@@ -27,12 +27,6 @@ class NavBar extends React.Component {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link as={NavLink} activeClassName="active" exact to="/home" key='home'>Home</Nav.Link>
-            <Nav.Link as={NavLink} activeClassName="active" exact to="/dailycheck" key='dailycheck'>
-                Daily Check
-            </Nav.Link>
-            <Nav.Link as={NavLink} activeClassName="active" exact to="/history" key='history'>History</Nav.Link>
-            <Nav.Link as={NavLink} activeClassName="active" exact to="/vaccine" key='Vaccine'>Vaccine</Nav.Link>
             {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
               <Nav.Link as={NavLink} activeClassName="active" exact to="/admin" key="admin">Admin</Nav.Link>
             ) : ''}
@@ -42,10 +36,6 @@ class NavBar extends React.Component {
               alignRight
               title={(<span>{this.props.currentUser}&nbsp;<FontAwesomeIcon icon={faUser}/></span>)}
               id="login-dropdown">
-              <NavDropdown.Item as={NavLink} exact to="/userinfo">
-                <FontAwesomeIcon icon={faUsersCog} className="mr-1"/>
-                  &nbsp;User Info
-              </NavDropdown.Item>
               <NavDropdown.Item as={NavLink} exact to="/signout">
                 <FontAwesomeIcon icon={faUserMinus} className="mr-1"/>
                   &nbsp;Sign Out
