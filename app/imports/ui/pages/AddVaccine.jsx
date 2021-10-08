@@ -34,6 +34,7 @@ class AddVaccine extends React.Component {
     this.swapImage = this.swapImage.bind(this);
     this.submit = this.submit.bind(this);
     this.updateForm = this.updateForm.bind(this);
+    this.uploadFile = this.uploadFile.bind(this);
     this.insertCollection = this.insertCollection.bind(this);
     this.updateCollection = this.updateCollection.bind(this);
   }
@@ -103,20 +104,22 @@ class AddVaccine extends React.Component {
     };
     let location;
     // Uploading files to the bucket
-    await s3.upload(params, function (err, data) {
+    return s3.upload(params, function (err, data) {
       if (err) {
         throw err;
       }
-      location = data.location;
-    });
-    this.setState({ imageURL: location });
+      location = data.Location;
+      // console.log(location);
+    }).promise();
+    // this.setState({ imageURL: location });
+    // console.log(location);
   };
 
-  submit(form) {
+  async submit(form) {
     form.preventDefault();
 
     const mode = this.props.vaccInfo === undefined;
-    this.uploadFile(this.state.image);
+    await this.uploadFile(this.state.image).then((data) => this.setState({ imageURL: data.Location }));
 
     if (mode) {
       this.insertCollection();
@@ -317,7 +320,6 @@ class AddVaccine extends React.Component {
                   </Form.Group>
                   <Row className='justify-content-center'>
                     <Figure>
-                      {console.log(this.state.imageURL)}
                       <Figure.Image
                         id='frameImage'
                         src={this.state.imageURL ? this.state.imageURL : this.state.imgFile}
