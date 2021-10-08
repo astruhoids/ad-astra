@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CheckInCards from '../components/CheckInCards';
 import { HealthStatus } from '../../api/healthstatus/HealthStatus';
 import Clearance from '../components/Clearance';
-import { VaccineInformation } from '../../api/vaccineInformation/VaccineInformation';
+import { VaccineInformation } from '../../api/vaccineinformation/VaccineInformation';
 import VaccineInfoCard from '../components/VaccineInfoCard';
 import NoVaccination from '../components/NoVaccination';
 import VerticalNavBar from '../components/VerticalNavBar';

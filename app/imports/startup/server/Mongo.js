@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { HealthStatus } from '../../api/healthstatus/HealthStatus.js';
 import { UserInformation } from '../../api/userinformation/UserInformation.js';
-import { VaccineInformation } from '../../api/vaccineInformation/VaccineInformation';
+import { VaccineInformation } from '../../api/vaccineinformation/VaccineInformation';
 
 function addCheckIn(data) {
   console.log(`\tRecording health check-in at ${data.date} for ${data.user}`);

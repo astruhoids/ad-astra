@@ -64,7 +64,7 @@ class VaccineInformationCollection {
       },
       card: {
         type: String,
-        optional: true,
+        // optional: true,
       },
     }, { tracker: Tracker });
 

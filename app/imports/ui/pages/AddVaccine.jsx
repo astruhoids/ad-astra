@@ -6,7 +6,8 @@ import swal from 'sweetalert';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { VaccineInformation } from '../../api/vaccineInformation/VaccineInformation';
+import AWS from 'aws-sdk';
+import { VaccineInformation } from '../../api/vaccineinformation/VaccineInformation';
 import VerticalNavBar from '../components/VerticalNavBar';
 
 /** A simple static component to render some text for the landing page. */
@@ -17,6 +18,8 @@ class AddVaccine extends React.Component {
       doses: 2,
       loaded: false,
       imgFile: '',
+      image: '',
+      imageURL: '',
       require: true,
       vaccine: '',
       firstLot: '',
@@ -45,7 +48,7 @@ class AddVaccine extends React.Component {
       secondLot: this.state.secondLot,
       secondDate: this.state.secondDate,
       secondLocation: this.state.secondLocation,
-      // card: this.state.card,
+      card: this.state.imageURL,
     }, (error) => {
       if (error) {
         swal('Error', error.message, 'error');
@@ -66,7 +69,7 @@ class AddVaccine extends React.Component {
         secondLot: this.state.secondLot,
         secondDate: this.state.secondDate,
         secondLocation: this.state.secondLocation,
-        // card: this.state.card,
+        card: this.state.imageURL,
       },
     }, (error) => {
       if (error) {
@@ -77,16 +80,50 @@ class AddVaccine extends React.Component {
     });
   }
 
+  uploadFile = async (file) => {
+    // Read content from the file
+    // const fileContent = fs.readFileSync(file);
+    // Set the region
+    AWS.config.update({ region: 'us-west-1' });
+
+    // Create S3 service object
+    const s3 = new AWS.S3({
+      accessKeyId: Meteor.settings.public.s3.accessKeyId,
+      secretAccessKey: Meteor.settings.public.s3.secretAccessKey,
+      apiVersion: '2006-03-01',
+    });
+
+    const type = file.name.split('.').pop();
+
+    // Setting up S3 upload parameters
+    const params = {
+      Bucket: 'astruhoidsbucket',
+      Key: `${this.props.currentUser}.${type}`, // File name you want to save as in S3
+      Body: file,
+    };
+    let location;
+    // Uploading files to the bucket
+    await s3.upload(params, function (err, data) {
+      if (err) {
+        throw err;
+      }
+      location = data.location;
+    });
+    this.setState({ imageURL: location });
+  };
+
   submit(form) {
     form.preventDefault();
 
     const mode = this.props.vaccInfo === undefined;
+    this.uploadFile(this.state.image);
 
     if (mode) {
       this.insertCollection();
     } else {
       this.updateCollection();
     }
+
   }
 
   handleDosages(e) {
@@ -105,7 +142,7 @@ class AddVaccine extends React.Component {
     const reader = new global.FileReader();
     reader.onload = r => {
       // console.log(r.target.result);
-      this.setState({ imgFile: r.target.result });
+      this.setState({ imgFile: r.target.result, image: image[0] });
     };
 
     reader.readAsDataURL(image[0]);
@@ -127,7 +164,7 @@ class AddVaccine extends React.Component {
         secondLot,
         secondDate,
         secondLocation,
-        // card,
+        card,
       } = this.props.vaccInfo;
       this.setState({
         vaccine,
@@ -137,7 +174,7 @@ class AddVaccine extends React.Component {
         secondLot,
         secondDate,
         secondLocation,
-        // card,
+        imageURL: card,
         loaded: true,
       });
 
@@ -161,7 +198,7 @@ class AddVaccine extends React.Component {
         <Container id="bg-image" className="d-flex" fluid>
           <Container className="justify-content-left align-self-center">
             <Row>
-              <VerticalNavBar classes="std-mt mr-4 pl-1 pr-1"/>
+              <VerticalNavBar classes="std-mt mr-4 pl-1 pr-1" />
               <Col id="vaccination-form">
                 <h2>Vaccination Card</h2>
                 <hr />
@@ -280,9 +317,10 @@ class AddVaccine extends React.Component {
                   </Form.Group>
                   <Row className='justify-content-center'>
                     <Figure>
+                      {console.log(this.state.imageURL)}
                       <Figure.Image
                         id='frameImage'
-                        src={this.state.imgFile ? this.state.imgFile : null}
+                        src={this.state.imageURL ? this.state.imageURL : this.state.imgFile}
                         width={800}
                         height={500}
                         thumbnail
