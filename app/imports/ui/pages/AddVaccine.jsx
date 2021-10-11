@@ -9,6 +9,7 @@ import moment from 'moment';
 import AWS from 'aws-sdk';
 import { VaccineInformation } from '../../api/vaccineinformation/VaccineInformation';
 import VerticalNavBar from '../components/VerticalNavBar';
+import Loader from '../components/Loader';
 
 /** A simple static component to render some text for the landing page. */
 class AddVaccine extends React.Component {
@@ -102,17 +103,12 @@ class AddVaccine extends React.Component {
       Key: `${this.props.currentUser}.${type}`, // File name you want to save as in S3
       Body: file,
     };
-    let location;
     // Uploading files to the bucket
-    return s3.upload(params, function (err, data) {
+    return s3.upload(params, function (err) {
       if (err) {
         throw err;
       }
-      location = data.Location;
-      // console.log(location);
     }).promise();
-    // this.setState({ imageURL: location });
-    // console.log(location);
   };
 
   async submit(form) {
@@ -139,12 +135,9 @@ class AddVaccine extends React.Component {
   }
 
   swapImage(e) {
-    // console.log(e);
     const image = e.target.files;
-    // console.log(image);
     const reader = new global.FileReader();
     reader.onload = r => {
-      // console.log(r.target.result);
       this.setState({ imgFile: r.target.result, image: image[0] });
     };
 
@@ -192,7 +185,11 @@ class AddVaccine extends React.Component {
   }
 
   render() {
-    return (this.props.ready ? this.renderPage() : '');
+    return (this.props.ready) ? this.renderPage() : (
+      <Container>
+        <Loader text='Getting data'/>
+      </Container>
+    );
   }
 
   renderPage() {
@@ -312,7 +309,6 @@ class AddVaccine extends React.Component {
                     <Form.Label>Vaccination Record Card</Form.Label>
                     <Form.Control
                       name='card'
-                      // value={this.state.card}
                       type='file'
                       accept='image/*'
                       onChange={e => this.swapImage(e)}

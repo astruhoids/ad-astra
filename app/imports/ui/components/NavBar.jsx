@@ -6,7 +6,6 @@ import { withRouter, NavLink } from 'react-router-dom';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faUserMinus } from '@fortawesome/free-solid-svg-icons';
-import { Roles } from 'meteor/alanning:roles';
 
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
 class NavBar extends React.Component {
@@ -26,12 +25,7 @@ class NavBar extends React.Component {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
-            {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
-              <Nav.Link as={NavLink} activeClassName="active" exact to="/admin" key="admin">Admin</Nav.Link>
-            ) : ''}
-          </Nav>
-          <Nav className="float-right">
+          <Nav className="ml-auto">
             <NavDropdown
               alignRight
               title={(<span>{this.props.currentUser}&nbsp;<FontAwesomeIcon icon={faUser}/></span>)}

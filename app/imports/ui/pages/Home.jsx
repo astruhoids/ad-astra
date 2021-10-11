@@ -13,10 +13,20 @@ import { VaccineInformation } from '../../api/vaccineinformation/VaccineInformat
 import VaccineInfoCard from '../components/VaccineInfoCard';
 import NoVaccination from '../components/NoVaccination';
 import VerticalNavBar from '../components/VerticalNavBar';
+import Loader from '../components/Loader';
 
 /** A simple static component to render some text for the landing page. */
 class Home extends React.Component {
   render() {
+    // If the subscription(s) have been received, render the page, otherwise show a loading icon.
+    return (this.props.ready) ? this.renderPage() : (
+      <Container>
+        <Loader text='Getting data'/>
+      </Container>
+    );
+  }
+
+  renderPage() {
     let dailychecks;
     if (this.props.ready) {
       dailychecks = this.props.health.sort((a, b) => (a.date.getDate() < b.date.getDate() ? 1 : -1)).slice(0, 4);
@@ -45,7 +55,7 @@ class Home extends React.Component {
                   <Link to='/dailycheck'>
                     <Button variant="outline-info" size='lg'>
                       <FontAwesomeIcon icon={faHeart} className="mr-2"/>
-                    Check Your Symptoms
+                      Check Your Symptoms
                     </Button>
                   </Link>
                 </Card.Body>

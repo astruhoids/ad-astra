@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
 class VaccineInfoCard extends React.Component {
+  /** Format dates from YYYY-MM-DD to MM/DD/YYYY */
   formatDate = (date) => date.toLocaleDateString('en-US')
 
   singleDose = ['Johnson', 'AstraZeneca', 'CanSinoBio', 'ZhifeiLongcom'];
