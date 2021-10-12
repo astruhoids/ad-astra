@@ -318,7 +318,9 @@ class AddVaccine extends React.Component {
                     <Figure>
                       <Figure.Image
                         id='frameImage'
-                        src={this.state.imageURL ? this.state.imageURL : this.state.imgFile}
+                        // eslint-disable-next-line no-nested-ternary
+                        src={this.state.imgFile ? this.state.imgFile : this.state.imageURL ?
+                          this.state.imageURL : null }
                         width={800}
                         height={500}
                         thumbnail
