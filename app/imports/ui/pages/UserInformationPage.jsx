@@ -89,12 +89,14 @@ class UserInformationPage extends React.Component {
       <Container id="bg-image" className="d-flex" fluid>
         <Container id="userinfo-page">
           <Row md>
-            <VerticalNavBar classes="pl-1 pr-1"/>
+            <VerticalNavBar classes="mr-4 pl-1 pr-1"/>
             <Col>
               <Card border="dark">
-                <Card.Header className="h2">User Information</Card.Header>
+                <Card.Header>
+                  <Card.Text as="h2" className="mt-2 mb-2 ml-3">User Information</Card.Text>
+                </Card.Header>
                 <Card.Body>
-                  <Form onSubmit={this.submit}>
+                  <Form onSubmit={this.submit} className="ml-3 mr-3">
                     <Form.Group>
                       <Form.Check.Label htmlFor="campus">
                         <span className="h5">Please select your Campus or Organization affiliation.</span>
