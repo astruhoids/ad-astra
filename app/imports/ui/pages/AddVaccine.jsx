@@ -9,6 +9,7 @@ import moment from 'moment';
 import AWS from 'aws-sdk';
 import { VaccineInformation } from '../../api/vaccineinformation/VaccineInformation';
 import VerticalNavBar from '../components/VerticalNavBar';
+import Loader from '../components/Loader';
 
 /** A simple static component to render some text for the landing page. */
 class AddVaccine extends React.Component {
@@ -103,7 +104,7 @@ class AddVaccine extends React.Component {
       Body: file,
     };
     // Uploading files to the bucket
-    return s3.upload(params, function (err, data) {
+    return s3.upload(params, function (err) {
       if (err) {
         throw err;
       }
@@ -134,12 +135,9 @@ class AddVaccine extends React.Component {
   }
 
   swapImage(e) {
-    // console.log(e);
     const image = e.target.files;
-    // console.log(image);
     const reader = new global.FileReader();
     reader.onload = r => {
-      // console.log(r.target.result);
       this.setState({ imgFile: r.target.result, image: image[0] });
     };
 
@@ -187,7 +185,11 @@ class AddVaccine extends React.Component {
   }
 
   render() {
-    return (this.props.ready ? this.renderPage() : '');
+    return (this.props.ready) ? this.renderPage() : (
+      <Container>
+        <Loader text='Getting data'/>
+      </Container>
+    );
   }
 
   renderPage() {

@@ -5,8 +5,8 @@ import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 
-/** Renders a single row in the List Stuff table. See pages/History.jsx. */
 class CheckInCards extends React.Component {
+  /** Format dates from YYYY-MM-DD to Day, Month DD, YYYY */
   dateOptions = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
 
   formatDate = (date) => date.toLocaleDateString('en-US', this.dateOptions)

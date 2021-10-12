@@ -10,7 +10,6 @@ import { HealthStatus } from '../../api/healthstatus/HealthStatus';
 import Loader from '../components/Loader';
 import VerticalNavBar from '../components/VerticalNavBar';
 
-/** A simple static component to render some text for the landing page. */
 class DailyCheckup extends React.Component {
   constructor(props) {
     super(props);

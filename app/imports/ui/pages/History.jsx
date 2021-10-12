@@ -6,12 +6,17 @@ import PropTypes from 'prop-types';
 import { HealthStatus } from '../../api/healthstatus/HealthStatus';
 import CheckInCards from '../components/CheckInCards';
 import VerticalNavBar from '../components/VerticalNavBar';
+import Loader from '../components/Loader';
 
 class History extends React.Component {
 
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
   render() {
-    return (this.props.ready) ? this.renderPage() : '';
+    return (this.props.ready) ? this.renderPage() : (
+      <Container>
+        <Loader text='Getting data'/>
+      </Container>
+    );
   }
 
   // Render the page once subscriptions have been received.

@@ -13,7 +13,7 @@ class NoVaccination extends React.Component {
             <Card.Title className="mb-4" style={{ fontSize: '25px' }}>Vaccination Card Submission</Card.Title>
             <div style={{ textAlign: 'center' }}>
               <Card.Subtitle className="text-muted">
-              In order to come to the campus, you need to submit your Vaccination Card.
+                In order to come to the campus, you need to submit your Vaccination Card.
               </Card.Subtitle>
               <Link to='/vaccine'>
                 <Button variant="outline-info" size='lg' className="mt-3">
