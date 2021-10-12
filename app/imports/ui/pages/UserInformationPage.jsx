@@ -93,9 +93,11 @@ class UserInformationPage extends React.Component {
             <VerticalNavBar classes="pl-1 pr-1 mr-4"/>
             <Col>
               <Card border="dark">
-                <Card.Header className="h2">User Information</Card.Header>
+                <Card.Header>
+                  <Card.Text as="h2" className="mt-2 mb-2 ml-3">User Information</Card.Text>
+                </Card.Header>
                 <Card.Body>
-                  <Form onSubmit={this.submit}>
+                  <Form onSubmit={this.submit} className="ml-3 mr-3">
                     <Form.Group>
                       <Form.Check.Label htmlFor="campus">
                         <span className="h5">Please select your Campus or Organization affiliation.</span>

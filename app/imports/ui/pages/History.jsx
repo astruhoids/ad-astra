@@ -28,7 +28,7 @@ class History extends React.Component {
       <Container id="bg-image" className="d-flex" fluid>
         <Container id="history-page">
           <Row>
-            <VerticalNavBar classes="mr-4 pl-1 pr-1" styling={{}}/>
+            <VerticalNavBar classes="mr-4 pl-1 pr-1"/>
             <Col>
               <h1 style={{ color: 'white' }} className="mb-4 text-border">Check-in History</h1>
               {dailychecks.map((health) => <CheckInCards key={health._id} health={health}/>)}
