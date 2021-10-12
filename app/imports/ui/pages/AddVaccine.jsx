@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Form, Col, Figure, Row, Button, Card } from 'react-bootstrap';
+import { Container, Form, Col, Figure, Row, Button, Card, ProgressBar } from 'react-bootstrap';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import swal from 'sweetalert';
@@ -317,7 +317,6 @@ class AddVaccine extends React.Component {
                         <Form.Label>Vaccination Record Card</Form.Label>
                         <Form.Control
                           name='card'
-                          // value={this.state.card}
                           type='file'
                           accept='image/*'
                           onChange={e => this.swapImage(e)}
@@ -327,17 +326,24 @@ class AddVaccine extends React.Component {
                         <Figure>
                           <Figure.Image
                             id='frameImage'
-                            src={this.state.imgFile ? this.state.imgFile : null}
+                            // eslint-disable-next-line no-nested-ternary
+                            src={this.state.imgFile ? this.state.imgFile : this.state.imageURL ?
+                              this.state.imageURL : null }
                             width={800}
                             height={500}
                             thumbnail
                           />
+                          {this.state.loading ?
+                            <Figure.Caption>
+                              <ProgressBar animated now={this.state.loading} />
+                            </Figure.Caption>
+                            : <></>}
                         </Figure>
                       </Row>
                       <Button type="submit">Submit form</Button>
                     </Form>
                   </Card.Body>
-                </Card> 
+                </Card>
               </Col>
             </Row>
           </Container>
