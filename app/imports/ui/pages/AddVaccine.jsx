@@ -102,17 +102,12 @@ class AddVaccine extends React.Component {
       Key: `${this.props.currentUser}.${type}`, // File name you want to save as in S3
       Body: file,
     };
-    let location;
     // Uploading files to the bucket
     return s3.upload(params, function (err, data) {
       if (err) {
         throw err;
       }
-      location = data.Location;
-      // console.log(location);
     }).promise();
-    // this.setState({ imageURL: location });
-    // console.log(location);
   };
 
   async submit(form) {
@@ -312,7 +307,6 @@ class AddVaccine extends React.Component {
                     <Form.Label>Vaccination Record Card</Form.Label>
                     <Form.Control
                       name='card'
-                      // value={this.state.card}
                       type='file'
                       accept='image/*'
                       onChange={e => this.swapImage(e)}
@@ -322,7 +316,9 @@ class AddVaccine extends React.Component {
                     <Figure>
                       <Figure.Image
                         id='frameImage'
-                        src={this.state.imageURL ? this.state.imageURL : this.state.imgFile}
+                        // eslint-disable-next-line no-nested-ternary
+                        src={this.state.imgFile ? this.state.imgFile : this.state.imageURL ?
+                          this.state.imageURL : null }
                         width={800}
                         height={500}
                         thumbnail
