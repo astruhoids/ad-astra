@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Form, Col, Figure, Row, Button } from 'react-bootstrap';
+import { Container, Form, Col, Figure, Row, Button, ProgressBar } from 'react-bootstrap';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import swal from 'sweetalert';
@@ -29,6 +29,7 @@ class AddVaccine extends React.Component {
       secondDate: '',
       secondLocation: '',
       card: '',
+      loading: 0,
     };
     this.handleDosages = this.handleDosages.bind(this);
     this.swapImage = this.swapImage.bind(this);
@@ -103,18 +104,24 @@ class AddVaccine extends React.Component {
       Body: file,
     };
     // Uploading files to the bucket
-    return s3.upload(params, function (err, data) {
+    const upload = s3.upload(params, function (err) {
       if (err) {
         throw err;
       }
-    }).promise();
+    });
+
+    await upload.on('httpUploadProgress', (progress) => {
+      this.setState({ loading: Math.round((progress.loaded / progress.total) * 100) });
+    });
+
+    return upload.promise();
   };
 
   async submit(form) {
     form.preventDefault();
 
     const mode = this.props.vaccInfo === undefined;
-    await this.uploadFile(this.state.image).then((data) => this.setState({ imageURL: data.Location }));
+    await this.uploadFile(this.state.image).then((data) => this.setState({ imageURL: data.Location, loading: 0 }));
 
     if (mode) {
       this.insertCollection();
@@ -323,6 +330,11 @@ class AddVaccine extends React.Component {
                         height={500}
                         thumbnail
                       />
+                      {this.state.loading ?
+                        <Figure.Caption>
+                          <ProgressBar animated now={this.state.loading} />
+                        </Figure.Caption>
+                        : <></>}
                     </Figure>
                   </Row>
                   <Button type="submit">Submit form</Button>
